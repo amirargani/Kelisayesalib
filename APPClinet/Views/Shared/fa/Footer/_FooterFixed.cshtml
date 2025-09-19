@@ -1,0 +1,112 @@
+﻿@using APPClinet.Areas.Identity.Data.Interfaces
+@inject IApplicationUser _iuser
+@{
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faPhoneNumber = APPClinet.Messages.faMessage.PhoneNumber.ToString();
+    var faPrivateNumber = APPClinet.Messages.faMessage.PrivateNumber.ToString();
+    var faTitleMap = APPClinet.Messages.faMessage.TitleMap.ToString();
+    var faClose = APPClinet.Messages.faMessage.Close.ToString();
+    var faMessageStartFirst = APPClinet.Messages.faMessage.MessageStartFirst.ToString();
+    var faMessageStartLast = APPClinet.Messages.faMessage.MessageStartLast.ToString();
+    var faCopyright = APPClinet.Messages.faMessage.Copyright.ToString();
+}
+@*index-shop.html*@
+<!-- Footer Start -->
+<footer class="footer" style="border-top: 3px solid #2f55d4;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                <div>
+                    <a href="/" class="logo">
+                        @await Html.PartialAsync("~/Views/Shared/fa/Logos/_Logo48.cshtml")
+                        <span class="font-weight-bold d-none d-block text-dark">@titleappfa</span>
+                    </a>
+                </div>
+                <div class="mt-2">
+                    @if (null != _iuser.OnGetSocialNetworks(1).Facebook)
+                    {
+                        <a href="@_iuser.OnGetSocialNetworks(1).Facebook" target="_blank" class="btn btn-icon btn-primary"><i class="fa fa-facebook"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).Twitter)
+                    {
+                        <a href="@_iuser.OnGetSocialNetworks(1).Twitter" target="_blank" class="btn btn-icon btn-info"><i class="fa fa-twitter"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).Instagram)
+                    {
+                        <a href="@_iuser.OnGetSocialNetworks(1).Instagram" target="_blank" class="btn btn-icon btn-dark"><i class="fa fa-instagram"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).Youtube)
+                    {
+                        <a href="@_iuser.OnGetSocialNetworks(1).Youtube" target="_blank" class="btn btn-icon btn-danger"><i class="fa fa-youtube-play"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).Telegram)
+                    {
+                        <a href="@_iuser.OnGetSocialNetworks(1).Telegram" target="_blank" class="btn btn-icon btn-blue"><i class="fa fa-paper-plane"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).Email)
+                    {
+                        <a href="mailto:@_iuser.OnGetSocialNetworks(1).Email" class="btn btn-icon btn-light"><i class="fas fa-envelope"></i></a>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).EmbedLinkGoogleMap)
+                    {
+                        <a href="#" data-toggle="modal" data-target="#MapWebsite" class="btn btn-icon btn-secondary"><i class="fas fa-map-marker-alt"></i></a>
+                        <!-- Map start -->
+                        @*getbootstrap.com/docs/4.5/components/modal/*@
+                        <div class="modal fade" id="MapWebsite" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">@faTitleMap</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="bg-white p-0 rounded box-shadow">
+                                            <div class="py-0">
+                                                <iframe src="@_iuser.OnGetSocialNetworks(1).EmbedLinkGoogleMap" style="width: 100%; min-height: 25vh; border:0;" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">@faClose</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Map end -->
+                    }
+                </div>
+                <div class="mt-2">
+                    @if (null != _iuser.OnGetSocialNetworks(1).PrivateNumber)
+                    {
+                        <div class="fen text-center"><a href="tel:@_iuser.OnGetSocialNetworks(1).PrivateNumber" class="mt-4 mr-2 ml-2 f16 text-dark mb-3">@_iuser.OnGetSocialNetworks(1).PrivateNumber</a><span class="text-dark f18 ffa">:@faPrivateNumber<i class="fas fa-phone mr-2"></i></span></div>
+                    }
+                    @if (null != _iuser.OnGetSocialNetworks(1).PhoneNumber)
+                    {
+                        <div class="fen text-center"><a href="tel:@_iuser.OnGetSocialNetworks(1).PhoneNumber" class="mt-4 mr-2 ml-2 f16 text-dark mb-3">@_iuser.OnGetSocialNetworks(1).PhoneNumber</a><span class="text-dark f18 ffa">:@faPhoneNumber<i class="fas fa-mobile mr-2"></i></span></div>
+                    }
+                    <span class="font-weight-bold f18n fen d-none d-block text-dark text-center"><i class="fas fa-map-marked-alt"></i>&nbsp;@_iuser.OnGetAddress(1).Street&nbsp;@_iuser.OnGetAddress(1).Number</span>
+                    <span class="font-weight-bold f18n fen d-none d-block text-dark text-center">@_iuser.OnGetAddress(1).PostCode&nbsp;@_iuser.OnGetAddress(1).City</span>
+                    <span class="font-weight-bold f18n fen d-none d-block text-dark text-center">@_iuser.OnGetAddress(1).Country</span>
+                </div>
+            </div><!--end col-->
+            @await Html.PartialAsync("~/Views/Shared/_FMenus.cshtml")
+        </div><!--end row-->
+    </div><!--end container-->
+</footer><!--end footer-->
+<footer class="footer footer-bar">
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col-sm-12">
+                <div class="text-sm-left">
+                    <p class="mb-0 text-center">@faMessageStartFirst&nbsp;<span class="text-primary font-weight-bold">@titleappfa&nbsp;</span>@faMessageStartLast</p>
+                    <p class="mb-0 text-center"><strong>©&nbsp;@if (DateTime.Now.Year == 2021){<span>2021</span>}@if (DateTime.Now.Year > 2021){<span>@DateTime.Now.Year-21</span>}&nbsp;-&nbsp;@faCopyright</strong></p>
+                    <p class="mb-0 f10n text-center"><i class="fas fa-heart text-danger mr-2"></i>by <a href="/" class="text-reset">A. Argani / P. Argani</a><i class="fas fa-heart text-danger ml-2"></i></p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</footer><!--end footer-->
+<!-- Footer End -->

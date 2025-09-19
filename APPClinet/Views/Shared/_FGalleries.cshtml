@@ -1,0 +1,23 @@
+﻿@using APPClinet.Areas.Identity.Data.Interfaces
+@inject IApplicationUser _iuser
+@* GalleryCategories & GallerySubCategories *@
+@{
+    foreach (var item in _iuser.OnGetGalleryCategories().OrderBy(a => a.Position))
+    {
+        if (item.ActivePassive == true)
+        {
+            <div class="col-lg-4 col-md-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                <h6 class="text-dark"><strong>@item.TitleCategory<i class="fas fa-chevron-down f10n ml-2"></i></strong></h6>
+                <ul class="list-unstyled footer-list mt-2 ml-3">
+                    @foreach (var itemsub in _iuser.OnGetGallerySubCategories().Where(sub => sub.CategoryId == item.Id).OrderBy(a => a.Position))
+                    {
+                        if (itemsub.ActivePassive == true)
+                        {
+                            <li><a href="/Identity/Search/Details/GalleryDetailsView?titlesubcategory=@itemsub.TitleSubCategory" class="f15n text-dark"><i class="fas fa-caret-left f10n mr-2"></i><b>@itemsub.TitleSubCategory</b></a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    }
+}

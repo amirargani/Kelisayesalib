@@ -1,0 +1,102 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.Details.ChurchDetailAddModel
+@{
+    var faDetailAdd = APPClinet.Messages.faMessage.DetailAdd.ToString();
+    ViewData["Title"] = faDetailAdd;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faSubCategoriesBackView = APPClinet.Messages.faMessage.SubCategoriesBackView.ToString();
+    var faTitleCategory = APPClinet.Messages.faMessage.TitleCategory.ToString();
+    var faTitleSubCategory = APPClinet.Messages.faMessage.TitleSubCategory.ToString();
+    var faImageBackground = APPClinet.Messages.faMessage.ImageBackground.ToString();
+    var faSelectFile = APPClinet.Messages.faMessage.SelectFile.ToString();
+    var faSizeImage = APPClinet.Messages.faMessage.SizeImage.ToString();
+    var faSelectImage = APPClinet.Messages.faMessage.SelectImage.ToString();
+    var faText = APPClinet.Messages.faMessage.Text.ToString();
+    var faButtonActivePassive = APPClinet.Messages.faMessage.ButtonActivePassive.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faDetailAdd</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/ChurchSubCategoriesView"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faSubCategoriesBackView</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="churchdetailadd-form mt-4" id="churchdetailadd-form" enctype="multipart/form-data" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="TitleCategory">@faTitleCategory</label>
+                <i class="fas fa-list-alt icon-sm icons"></i>
+                <select asp-for="CategoryId" class="form-control custom-select" disabled>
+                    <option value="@Model.CategoryId">@Model.TitleCategory</option>
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="TitleSubCategory">@faTitleSubCategory</label>
+                <i class="far fa-list-alt icon-sm icons"></i>
+                <select asp-for="SubCategoryId" class="form-control custom-select" disabled>
+                    <option value="@Model.SubCategoryId">@Model.TitleSubCategory</option>
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <strong class="text-danger f15 fen" style="float: left;">1903x1070 px</strong><br />
+            <div class="form-group position-relative">
+                <div class="mb-2">
+                    <strong class="text-dark">@faImageBackground</strong><br />
+                    <label asp-for="Input.Image" class="text-black-50">@faSelectFile&nbsp;<span class="text-danger">:&nbsp;<b>jpg</b></span></label>
+                    <br /><strong class="text-warning">@faSizeImage</strong>
+                </div>
+                <input type="file" asp-for="Input.Image" name="Image" class="form-control-file" id="file" hidden>
+                <label for="file" class="btn btn-light js-labelFile">
+                    <i class="far fa-image text-danger"></i>
+                    <span class="js-fileName">@faSelectImage</span>
+                </label>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Text">@faText</label>
+                <textarea asp-for="Input.Text" class="form-control pl-5" placeholder="" rows="3" id="ckeditor"></textarea>
+                <span asp-validation-for="Input.Text" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <div class="form-group mb-0">
+                            <input type="checkbox" asp-for="Input.ActivePassive" class="custom-control-input" id="customSwitch1" checked>
+                            <label asp-for="Input.ActivePassive" class="custom-control-label" for="customSwitch1">@faButtonActivePassive</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+
+
+        <div class="col-lg-12 mb-0">
+            <button class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    @await Html.PartialAsync("~/Views/Shared/_UploadJavaScript.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_CKEditorJavaScript.cshtml")
+    <partial name="_ValidationScriptsPartial" />
+}

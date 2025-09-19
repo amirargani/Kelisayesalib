@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using APPClinet.Areas.Identity.Data
+@using APPClinet.Areas.Identity.Data.Interfaces
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IApplicationUser _iuser
+@{
+    var faMyAccountText = APPClinet.Messages.faMessage.MyAccountText.ToString();
+    var faLoginText = APPClinet.Messages.faMessage.LoginText.ToString();
+    var faRegisterText = APPClinet.Messages.faMessage.RegisterText.ToString();
+    var faDashboard = APPClinet.Messages.faMessage.DashboardText.ToString();
+    var faButtonLogin = APPClinet.Messages.faMessage.ButtonLogin.ToString();
+    var faButtonRegister = APPClinet.Messages.faMessage.ButtonRegister.ToString();
+    var faButtonLogout = APPClinet.Messages.faMessage.ButtonLogout.ToString();
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="has-submenu">
+        @if (UserManager.GetUserAsync(User).Result.FirstName == null)
+        {
+            <a href="javascript:void(0)"><i class="fa fa-user-tie mr-2"></i>@faMyAccountText</a><span class="menu-arrow"></span>
+        }
+        else
+        {
+            <a href="javascript:void(0)"><i class="fa fa-user-tie mr-2"></i>@UserManager.GetUserAsync(User).Result.FirstName&nbsp;@UserManager.GetUserAsync(User).Result.LastName</a><span class="menu-arrow"></span>
+        }
+        <ul class="submenu">
+            @if (_iuser.ExistsRoleName(User.Identity.Name) == "User")
+            {
+                <li><a href="/Identity/Account/Dashboard/User/Index"><i class="fa fa-cog mr-2"></i>@faDashboard</a></li>
+            }
+            @if (_iuser.ExistsRoleName(User.Identity.Name) == "Admin")
+            {
+                <li><a href="/Identity/Account/Dashboard/Admin/Index"><i class="fa fa-cog mr-2"></i>@faDashboard</a></li>
+            }
+            <li class="dropdown-divider"></li>
+            <li>
+                <form class="form-inline" asp-controller="fa" asp-action="Logout" asp-route-returnurl="@Url.Content("~/")" method="post">
+                    <button type="submit" class="nav-link btn btn-link text-dark"><i class="fa fa-power-off mr-2"></i>@faButtonLogout</button>
+                </form>
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <li class="has-submenu">
+        <a href="javascript:void(0)"><i class="fa fa-user-tie mr-2"></i>@faLoginText&nbsp;/&nbsp;@faRegisterText</a><span class="menu-arrow"></span>
+        <ul class="submenu">
+            <li><a href="/Identity/Account/Login"><i class="fa fa-user mr-2"></i>@faButtonLogin</a></li>
+            <li><a href="/Identity/Account/Register"><i class="fa fa-user-plus mr-2"></i>@faButtonRegister</a></li>
+        </ul>
+    </li>
+}

@@ -1,0 +1,84 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.Settings.AddressModel
+@{
+    var faDetailEdit = APPClinet.Messages.faMessage.DetailEdit.ToString();
+    ViewData["Title"] = faDetailEdit;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faSettings = APPClinet.Messages.faMessage.Settings.ToString();
+    var faStreet = APPClinet.Messages.faMessage.Street.ToString();
+    var faNumber = APPClinet.Messages.faMessage.Number.ToString();
+    var faPostCode = APPClinet.Messages.faMessage.PostCode.ToString();
+    var faCity = APPClinet.Messages.faMessage.City.ToString();
+    var faCountry = APPClinet.Messages.faMessage.Country.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faDetailEdit</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/Settings/Index"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faSettings</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-th-list mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="address-form mt-4" id="address-form" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Street">@faStreet</label>
+                <i class="fas fa-road icon-sm icons"></i>
+                <input type="text" asp-for="Input.Street" class="form-control pl-5 fen" placeholder="">
+                <span asp-validation-for="Input.Street" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Number">@faNumber</label>
+                <i class="fas fa-home icon-sm icons"></i>
+                <input type="number" asp-for="Input.Number" class="form-control pl-5 fen" placeholder="" min="1" max="999" value="@Model.Input.Number">
+                <span asp-validation-for="Input.Number" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.PostCode">@faPostCode</label>
+                <i class="fas fa-envelope-open-text icon-sm icons"></i>
+                <input type="number" asp-for="Input.PostCode" class="form-control pl-5 fen" placeholder="" min="10000" max="99999" value="@Model.Input.PostCode">
+                <span asp-validation-for="Input.PostCode" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.City">@faCity</label>
+                <i class="fas fa-city icon-sm icons"></i>
+                <input type="text" asp-for="Input.City" class="form-control pl-5 fen" placeholder="">
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Country">@faCountry</label>
+                <i class="fas fa-flag icon-sm icons"></i>
+                <input type="text" asp-for="Input.Country" class="form-control pl-5 fen" placeholder="">
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12 mb-0">
+            <button class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

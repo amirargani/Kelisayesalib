@@ -1,0 +1,1 @@
+﻿<script> $(document).ready(function () { $('table .btn-success').on('click', function () { var id = $(this).parent().find('#id').val(); $.ajax({ type: 'GET', data: { id: id }, url: '@Url.Page("CourseDetailsInfoView", "Views")' }); }); }); </script>

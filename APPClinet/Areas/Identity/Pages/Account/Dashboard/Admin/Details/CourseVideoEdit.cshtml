@@ -1,0 +1,113 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.Details.CourseVideoEditModel
+@{
+    var faVideoEdit = APPClinet.Messages.faMessage.VideoEdit.ToString();
+    ViewData["Title"] = faVideoEdit;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faDetailView = APPClinet.Messages.faMessage.DetailView.ToString();
+    var faTitleCategory = APPClinet.Messages.faMessage.TitleCategory.ToString();
+    var faTitleSubCategory = APPClinet.Messages.faMessage.TitleSubCategory.ToString();
+    var faDetail = APPClinet.Messages.faMessage.Detail.ToString();
+    var faVideo = APPClinet.Messages.faMessage.Video.ToString();
+    var faSelectFile = APPClinet.Messages.faMessage.SelectFile.ToString();
+    var faSizeVideo = APPClinet.Messages.faMessage.SizeVideo.ToString();
+    var faSelectVideo = APPClinet.Messages.faMessage.SelectVideo.ToString();
+    var faButtonActivePassive = APPClinet.Messages.faMessage.ButtonActivePassive.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faVideoEdit</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/CourseVideosView?id=@Model.Input.DetailId"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faDetailView</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="coursevideoedit-form mt-4" id="coursevideoedit-form" enctype="multipart/form-data" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="TitleCategory">@faTitleCategory</label>
+                <i class="fas fa-list-alt icon-sm icons"></i>
+                <select asp-for="CategoryId" class="form-control custom-select" disabled>
+                    <option value="@Model.CategoryId">@Model.TitleCategory</option>
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="TitleSubCategory">@faTitleSubCategory</label>
+                <i class="far fa-list-alt icon-sm icons"></i>
+                <select asp-for="SubCategoryId" class="form-control custom-select" disabled>
+                    <option value="@Model.SubCategoryId">@Model.TitleSubCategory</option>
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="TitleDetail">@faDetail</label>
+                <i class="far fa-list-alt icon-sm icons"></i>
+                <select asp-for="TitleDetail" class="form-control custom-select" disabled>
+                    <option value="@Model.TitleDetail">@Model.TitleDetail</option>
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Title"></label>
+                <i class="far fa-address-book icon-sm icons"></i>
+                <input type="text" asp-for="Input.Title" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <strong class="text-danger f15 fen" style="float: left;">350 MB</strong><br />
+            <div class="form-group position-relative">
+                <div class="mb-2">
+                    <strong class="text-dark">@faVideo</strong><br />
+                    <label asp-for="Input.Video" class="text-black-50">@faSelectFile&nbsp;<span class="text-danger">:&nbsp;<b class="fen">mp4</b></span></label>
+                    <br /><strong class="text-warning">@faSizeVideo</strong>
+                </div>
+                <input type="file" asp-for="Input.Video" name="Video" class="form-control-file" id="file" hidden>
+                <label for="file" class="btn btn-light js-labelFile">
+                    <i class="fas fa-film text-danger"></i>
+                    <span class="js-fileName">@faSelectVideo</span>
+                </label>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <div class="form-group mb-0">
+                            <input type="checkbox" asp-for="Input.ActivePassive" class="custom-control-input" id="customSwitch1" checked>
+                            <label asp-for="Input.ActivePassive" class="custom-control-label" for="customSwitch1">@faButtonActivePassive</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+
+
+        <div class="col-lg-12 mb-0">
+            <button class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    @await Html.PartialAsync("~/Views/Shared/_UploadVideoJavaScript.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_CKEditorJavaScript.cshtml")
+    <partial name="_ValidationScriptsPartial" />
+}

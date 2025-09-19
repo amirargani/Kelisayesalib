@@ -1,0 +1,12 @@
+﻿<script>
+    $(document).ready(function () {
+        $("div .plus").on("click", function () {
+            var id = $(this).parent().find("#id").val();
+            $.ajax({
+                type: "GET",
+                data: { id: id },
+                url: '@Url.Page("GalleryDetailsInfoView", "Views")'
+            });
+        });
+    });
+</script>

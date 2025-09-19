@@ -1,0 +1,157 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.SubCategories.CourseSubCategoriesViewModel
+@{
+    var faSubCategoriesView = APPClinet.Messages.faMessage.SubCategoriesView.ToString();
+    ViewData["Title"] = faSubCategoriesView;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faSubCategories = APPClinet.Messages.faMessage.SubCategories.ToString();
+    var faSubCategoriesManage = APPClinet.Messages.faMessage.SubCategoriesManage.ToString();
+    var faSubCategoryAdd = APPClinet.Messages.faMessage.SubCategoryAdd.ToString();
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faDetailView = APPClinet.Messages.faMessage.DetailView.ToString();
+    var faTitleSubCategory = APPClinet.Messages.faMessage.TitleSubCategory.ToString();
+    var faDescription = APPClinet.Messages.faMessage.Description.ToString();
+    var faPlus = APPClinet.Messages.faMessage.Plus.ToString();
+    var faMinus = APPClinet.Messages.faMessage.Minus.ToString();
+    var faEdit = APPClinet.Messages.faMessage.Edit.ToString();
+    var faDetail = APPClinet.Messages.faMessage.Detail.ToString();
+    var faSubCategoriesNotfound = APPClinet.Messages.faMessage.SubCategoriesNotfound.ToString();
+    int count = 1;
+    var faPrev = APPClinet.Messages.faMessage.Prev.ToString();
+    var faNext = APPClinet.Messages.faMessage.Next.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faSubCategoriesManage&nbsp;@faSubCategories</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/CourseSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-chevron-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+@*@if (Model.subcategories.Count() > 0)
+{
+    <form method="post">
+        <table class="table table-striped table-hover">
+            <thead>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model.subcategories.OrderBy(u => u.Date).OrderBy(u => u.CategoryId))
+                {
+
+                }
+            </tbody>
+        </table>
+    </form>
+}*@
+@if (Model.pages.courseSubCategories.Count() > 0)
+{
+    <form method="post">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th><i class="fas fa-eye mr-2 f10"></i></th>
+                    <th scope="col">@faTitleSubCategory</th>
+                    <th scope="col"><span class="text-success">@faPlus</span>&nbsp;/&nbsp;<span class="text-danger">@faMinus</span></th>
+                    <th scope="col">@faEdit</th>
+                    <th scope="col">@faDetail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.pages.courseSubCategories)
+                {
+                    @*var detail = item.Tbl_GalleryDetails.Where(a => a.SubCategoryId == item.Id).FirstOrDefault();*@
+                    string bg = "";
+                    if (item.ActivePassive == false)
+                    {
+                        bg = "background-color: #ffeaed;";
+                    }
+                    <tr class="font-weight-bold" style="font-size: 0.83rem !important; @bg">
+                        <td scope="row">@count</td>
+                        <td>@if (item.CountViews == null){<span>0</span>}@if (item.CountViews > 0){<span>@item.CountViews</span>}</td>
+                        @*<td>@item.TitleSubCategory</td>*@
+                        <th>@item.Tbl_CourseCategories.TitleCategory<i class="fas fa-chevron-down ml-2"></i><br /><b><i class="fas fa-caret-left mr-2"></i>@item.TitleSubCategory</b></th>
+                        <td>
+                            @{
+                                if (item.ActivePassive == false)
+                                {
+                                    <button asp-page-handler="Active" asp-route-id="@item.Id" class="btn btn-icon btn-sm btn-success"><i class="fas fa-check"></i></button>
+                                }
+                                else
+                                {
+                                    <button asp-page-handler="Inactive" asp-route-id="@item.Id" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <button asp-page="CourseSubCategoryEdit" asp-route-id="@item.Id" class="btn btn-icon btn-sm btn-info"><i class="fas fa-edit"></i></button>
+                        </td>
+                        <td>
+                            @*@{
+                                    if (detail == null)
+                                    {
+                                        <a href="/Identity/Account/Dashboard/Admin/Details/CourseDetailAdd?id=@item.Id" class="btn btn-icon btn-sm btn-primary"><i class="fas fa-plus"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Identity/Account/Dashboard/Admin/Details/CourseDetailEdit?id=@item.Id" class="btn btn-icon btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    }
+                                }*@
+                            <a href="/Identity/Account/Dashboard/Admin/Details/CourseDetailAdd?id=@item.Id" class="btn btn-icon btn-sm btn-primary"><i class="fas fa-plus"></i></a>
+                        </td>
+                    </tr>
+                    count = count + 1;
+                }
+            </tbody>
+        </table>
+    </form>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h6 class="text-center mb-0"><span class="text-white font-weight-bold">@faSubCategoriesNotfound</span></h6>
+    </div>
+}
+<div class="p-0 mt-5">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <a class="btn btn-outline-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/CourseDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+        </div>
+    </div>
+</div>
+<!-- PAGINATION START -->
+@*href="javascript:void(0)"*@
+@if (Model.pages.PageCount > 1)
+{
+    <div class="col-12 pt-md-4 pt-5">
+        <ul class="pagination justify-content-center mb-0">
+            @if (Model.pages.CurrentPage > 1)
+            {
+                <li class="page-item"><a class="page-link" href="/Identity/Account/Dashboard/Admin/SubCategories/GallerySubCategoriesView?pageid=@(Model.pages.CurrentPage - 1)" aria-label="Previous">@faPrev</a></li>
+            }
+            @for (int i = 1; i <= Model.pages.PageCount; i++)
+            {
+                <li class="page-item @((i == Model.pages.CurrentPage)? "active" : "")">
+                    @if (i == Model.pages.CurrentPage)
+                    {
+                        <span class="page-link" style="cursor: default;">@i</span>
+                    }
+                    @if (i != Model.pages.CurrentPage)
+                    {
+                        <a class="page-link" href="/Identity/Account/Dashboard/Admin/SubCategories/GallerySubCategoriesView?pageid=@i">@i</a>
+                    }
+                </li>
+            }
+            @if (Model.pages.CurrentPage < Model.pages.PageCount)
+            {
+                <li class="page-item"><a class="page-link" href="/Identity/Account/Dashboard/Admin/SubCategories/GallerySubCategoriesView?pageid=@(Model.pages.CurrentPage + 1)" aria-label="Next">@faNext</a></li>
+            }
+        </ul>
+    </div>
+}
+<!-- PAGINATION END -->

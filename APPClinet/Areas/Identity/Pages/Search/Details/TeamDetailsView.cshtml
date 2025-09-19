@@ -1,0 +1,132 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Search.Details.TeamDetailsViewModel
+@{
+    ViewData["Title"] = Model.Input.TitleSubCategory;
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    string image = "/uploads/images/details/default/default.jpg";
+    var faPrev = APPClinet.Messages.faMessage.Prev.ToString();
+    var faNext = APPClinet.Messages.faMessage.Next.ToString();
+}
+
+<!-- Hero Start -->
+<section class="bg-half-260 bg-primary d-table w-100" style="background: url('@image') center center;background-size: cover;margin-top: 82px;" id="home">
+    <div class="bg-overlay"></div>
+</section><!--end section-->
+@*<div class="position-relative">
+        <div class="shape overflow-hidden text-white">
+            <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </div>*@
+<!-- Hero End -->
+<!-- Hero Start -->
+<section class="section pt-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next">
+                    <div aria-label="breadcrumb" class="d-inline-block">
+                        <div class="breadcrumb bg-white rounded shadow mb-0">
+                            <div class="breadcrumb-item"><strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleCategory</strong>&nbsp;&nbsp;<strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleSubCategory</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+        <div class="row mt-5">
+            @*@if (Model.details.Count > 0)
+                {
+                    foreach (var item in Model.details.OrderByDescending(u => u.Date))
+                    {
+
+                    }
+                }*@
+            @if (Model.pages.teamDetails.Count > 0)
+            {
+                foreach (var item in Model.pages.teamDetails)
+                {
+                    <div class="col-lg-3 col-md-6 mt-4 pt-2">
+                        <div class="card team text-center border-0">
+                            <div class="position-relative">
+                                <img src="~/uploads/images/details/teams/@item.ImageProfile" class="img-fluid avatar avatar-ex-large shadow" alt="">
+                                @if (item.Facebook != null || item.Twitter != null || item.Instagram != null || item.Telegram != null)
+                                {
+                                    <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                                        @if (item.Facebook != null)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="@item.Facebook" target="_blank" class="btn btn-icon btn-primary"><i class="fa fa-facebook"></i></a>
+                                            </li>
+                                        }
+                                        @if (item.Twitter != null)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="@item.Twitter" target="_blank" class="btn btn-icon btn-info"><i class="fa fa-twitter"></i></a>
+                                            </li>
+                                        }
+                                        @if (item.Instagram != null)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="@item.Instagram" target="_blank" class="btn btn-icon btn-dark"><i class="fa fa-instagram"></i></a>
+                                            </li>
+                                        }
+                                        @if (item.Telegram != null)
+                                        {
+                                            <li class="list-inline-item">
+                                                <a href="@item.Telegram" target="_blank" class="btn btn-icon btn-blue"><i class="fa fa-paper-plane"></i></a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                            <div class="card-body py-3 px-0 content">
+                                <h5 class="mb-0"><a href="/Identity/Search/Details/TeamDetailsBioView?id=@item.Id&firstname=@item.FirstName.Replace(" ", "§").ToString()&lastname=@item.LastName.Replace(" ", "§").ToString()" class="name text-dark">@item.FirstName&nbsp;@item.LastName</a></h5>
+                                @if (item.FirstNameEN != null && item.LastNameEN != null)
+                                {
+                                    <h6 class="mb-0"><a href="/Identity/Search/Details/TeamDetailsBioView?id=@item.Id&firstname=@item.FirstName.Replace(" ", "§").ToString()&lastname=@item.LastName.Replace(" ", "§").ToString()" class="name text-dark f10">@item.FirstNameEN&nbsp;@item.LastNameEN</a></h6>
+                                }
+                                @if (item.Service != null)
+                                {
+                                    <small class="designation text-muted">@item.Service</small>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <!-- PAGINATION START -->
+            @*href="javascript:void(0)"*@
+            @if (Model.pages.PageCount > 1)
+            {
+                <div class="col-12 pt-md-4 pt-5">
+                    <ul class="pagination justify-content-center mb-0">
+                        @if (Model.pages.CurrentPage > 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Identity/Search/Details/TeamDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@(Model.pages.CurrentPage - 1)" aria-label="Previous">@faPrev</a></li>
+                        }
+                        @for (int i = 1; i <= Model.pages.PageCount; i++)
+                        {
+                            <li class="page-item @((i == Model.pages.CurrentPage)? "active" : "")">
+                                @if (i == Model.pages.CurrentPage)
+                                {
+                                    <span class="page-link" style="cursor: default;">@i</span>
+                                }
+                                @if (i != Model.pages.CurrentPage)
+                                {
+                                    <a class="page-link" href="/Identity/Search/Details/TeamDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@i">@i</a>
+                                }
+                            </li>
+                        }
+                        @if (Model.pages.CurrentPage < Model.pages.PageCount)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Identity/Search/Details/TeamDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@(Model.pages.CurrentPage + 1)" aria-label="Next">@faNext</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+            <!-- PAGINATION END -->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->

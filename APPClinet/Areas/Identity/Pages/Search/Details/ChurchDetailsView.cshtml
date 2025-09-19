@@ -1,0 +1,85 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Search.Details.ChurchDetailsViewModel
+@{
+    ViewData["Title"] = Model.Input.TitleSubCategory;
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    string image = null;
+    var faShare = APPClinet.Messages.faMessage.Share.ToString();
+    //urlencoder.io
+    string pagelink = Url.ActionLink().Replace("/Search/Details/ChurchDetailsView", "/ShortUrl/CHDV").ToString() + "?pageid=" + Model.Input.Id;
+}
+@if (Model.Input.Image != null)
+{
+    image = "/uploads/images/details/church/" + Model.Input.Image;
+}
+@if (Model.Input.Image == null)
+{
+    image = "/uploads/images/details/default/default.jpg";
+}
+
+<!-- Hero Start -->
+<section class="bg-half-260 bg-primary d-table w-100" style="background: url('@image') center center;background-size: cover;margin-top: 82px;" id="home">
+    <div class="bg-overlay"></div>
+</section><!--end section-->
+@*<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>*@
+<!-- Hero End -->
+<!-- Hero Start -->
+<section class="section pt-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next">
+                    <div aria-label="breadcrumb" class="d-inline-block">
+                        <div class="breadcrumb bg-white rounded shadow mb-0">
+                            <div class="breadcrumb-item"><strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleCategory</strong>&nbsp;&nbsp;<strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleSubCategory</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+<!-- Section Start -->
+<section class="section pt-md-4 pt-5">
+    <!-- Start Features -->
+    <div class="container">
+        <div class="row text-justify">
+            <div class="col-lg-12">
+                <div class="f25n">
+                    @Html.Raw(Model.Input.Text)
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-12">
+                <div class="f18n mt-5">
+                    <strong>@faShare</strong>
+                </div>
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=@pagelink" target="_blank" class="btn btn-icon btn-outline-primary"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="http://twitter.com/share?text=@pagelink" target="_blank" class="btn btn-icon btn-outline-info"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://telegram.me/share/url?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-blue"><i class="fa fa-paper-plane"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://api.whatsapp.com/send/?phone&text=@pagelink" target="_blank" class="btn btn-icon btn-outline-success"><i class="fa fa-whatsapp"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-dark"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul><!--end icon-->
+            </div>
+        </div><!--end row-->
+    </div><!--end container-->
+    <!-- End Features -->
+</section><!--end section-->
+<!-- Section End -->

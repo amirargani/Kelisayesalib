@@ -1,0 +1,15 @@
+﻿@{
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+}
+<li class="has-submenu">
+    <a href="javascript:void(0)">@titleappfa</a><span class="menu-arrow"></span>
+    <ul class="submenu">
+        @await Html.PartialAsync("~/Views/Shared/_HEvents.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/_HChurch.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/_HCourses.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/_HNews.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/_HGalleries.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/_HTeams.cshtml")
+    </ul>
+</li>

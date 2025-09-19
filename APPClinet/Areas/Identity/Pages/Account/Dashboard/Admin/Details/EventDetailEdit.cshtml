@@ -1,0 +1,251 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.Details.EventDetailEditModel
+@{
+    var faDetailEdit = APPClinet.Messages.faMessage.DetailEdit.ToString();
+    ViewData["Title"] = faDetailEdit;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faSubCategoriesBackView = APPClinet.Messages.faMessage.SubCategoriesBackView.ToString();
+    var faTitleCategory = APPClinet.Messages.faMessage.TitleCategory.ToString();
+    var faTitleSubCategory = APPClinet.Messages.faMessage.TitleSubCategory.ToString();
+    var faImageBackground = APPClinet.Messages.faMessage.ImageBackground.ToString();
+    var faSelectFile = APPClinet.Messages.faMessage.SelectFile.ToString();
+    var faSizeImage = APPClinet.Messages.faMessage.SizeImage.ToString();
+    var faSelectImage = APPClinet.Messages.faMessage.SelectImage.ToString();
+    var faText = APPClinet.Messages.faMessage.Text.ToString();
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faPhoneNumber = APPClinet.Messages.faMessage.PhoneNumber.ToString();
+    var faPrivateNumber = APPClinet.Messages.faMessage.PrivateNumber.ToString();
+    var faTelegram = APPClinet.Messages.faMessage.Telegram.ToString();
+    var faYoutube = APPClinet.Messages.faMessage.Youtube.ToString();
+    var faInstagram = APPClinet.Messages.faMessage.Instagram.ToString();
+    var faTwitter = APPClinet.Messages.faMessage.Twitter.ToString();
+    var faFacebook = APPClinet.Messages.faMessage.Facebook.ToString();
+    var faWebsite = APPClinet.Messages.faMessage.Website.ToString();
+    var faYoutubeLink = APPClinet.Messages.faMessage.YoutubeLink.ToString();
+    var faStartAt = APPClinet.Messages.faMessage.StartAt.ToString();
+    var faStopAt = APPClinet.Messages.faMessage.StopAt.ToString();
+    var faTimeEvent = APPClinet.Messages.faMessage.TimeEvent.ToString();
+    var faCountdown = APPClinet.Messages.faMessage.Countdown.ToString();
+    var faEmbedLinkGoogleMap = APPClinet.Messages.faMessage.EmbedLinkGoogleMap.ToString();
+    var faButtonActivePassive = APPClinet.Messages.faMessage.ButtonActivePassive.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faDetailEdit</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/EventSubCategoriesView"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faSubCategoriesBackView</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="eventdetailedit-form mt-4" id="eventdetailedit-form" enctype="multipart/form-data" method="post">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="TitleCategory">@faTitleCategory</label>
+                    <i class="fas fa-list-alt icon-sm icons"></i>
+                    <select asp-for="CategoryId" class="form-control custom-select" disabled>
+                        <option value="@Model.CategoryId">@Model.TitleCategory</option>
+                    </select>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="TitleSubCategory">@faTitleSubCategory</label>
+                    <i class="far fa-list-alt icon-sm icons"></i>
+                    <select asp-for="SubCategoryId" class="form-control custom-select" disabled>
+                        <option value="@Model.SubCategoryId">@Model.TitleSubCategory</option>
+                    </select>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <strong class="text-danger f15 fen" style="float: left;">1903x1070 px</strong><br />
+                <div class="form-group position-relative">
+                    <div class="mb-2">
+                        <strong class="text-dark">@faImageBackground</strong><br />
+                        <label asp-for="Input.Image" class="text-black-50">@faSelectFile&nbsp;<span class="text-danger">:&nbsp;<b>jpg</b></span></label>
+                        <br /><strong class="text-warning">@faSizeImage</strong>
+                    </div>
+                    <input type="file" asp-for="Input.Image" name="Image" class="form-control-file" id="file" hidden>
+                    <label for="file" class="btn btn-light js-labelFile">
+                        <i class="far fa-image text-danger"></i>
+                        <span class="js-fileName">@faSelectImage</span>
+                    </label>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Text">@faText</label>
+                    <textarea asp-for="Input.Text" class="form-control pl-5" placeholder="" rows="3" id="ckeditor"></textarea>
+                    <span asp-validation-for="Input.Text" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Email">@faEmail</label>
+                    <i class="fas fa-envelope icon-sm icons"></i>
+                    <input type="email" asp-for="Input.Email" class="form-control pl-5 fen" placeholder="">
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <strong class="text-danger f15 fen" style="float: left;">+49 16X XXXXXXX | +49 17X XXXXXXXX</strong><br />
+                <div class="form-group position-relative">
+                    <label asp-for="Input.PhoneNumber">@faPhoneNumber</label>
+                    <i class="fas fa-mobile icon-sm icons"></i>
+                    <input type="tel" asp-for="Input.PhoneNumber" class="form-control pl-5 fen" placeholder="">
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <strong class="text-danger f15 fen" style="float: left;">+49 4XX XXXXXXX</strong><br />
+                <div class="form-group position-relative">
+                    <label asp-for="Input.PrivateNumber">@faPrivateNumber</label>
+                    <i class="fas fa-phone icon-sm icons"></i>
+                    <input type="tel" asp-for="Input.PrivateNumber" class="form-control pl-5 fen" placeholder="">
+                    <span asp-validation-for="Input.PrivateNumber" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Telegram">@faTelegram</label>
+                    <i class="fab fa-telegram icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Telegram" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Youtube">@faYoutube</label>
+                    <i class="fab fa-youtube icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Youtube" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Instagram">@faInstagram</label>
+                    <i class="fab fa-instagram-square icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Instagram" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Twitter">@faTwitter</label>
+                    <i class="fab fa-twitter icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Twitter" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Facebook">@faFacebook</label>
+                    <i class="fab fa-facebook-square icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Facebook" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.Website">@faWebsite</label>
+                    <i class="fas fa-link icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Website" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <strong class="text-danger f15 fen" style="float: left;">https://www.youtube.com/watch?v=<span class="text-danger">xxxxxxxx</span></strong><br />
+                <div class="form-group position-relative">
+                    <label asp-for="Input.YoutubeLink">@faYoutubeLink</label>
+                    <i class="fab fa-youtube icon-sm icons"></i>
+                    <input type="text" asp-for="Input.YoutubeLink" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.StartAt">@faStartAt</label>
+                    <i class="fas fa-stopwatch-20 icon-sm icons"></i>
+                    <input type="number" asp-for="Input.StartAt" class="form-control pl-5 fen" placeholder="" min="0" max="36000" value="@Model.Input.StartAt">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.StopAt">@faStopAt</label>
+                    <i class="fas fa-stopwatch icon-sm icons"></i>
+                    <input type="number" asp-for="Input.StopAt" class="form-control pl-5 fen" placeholder="" min="0" max="36000" value="@Model.Input.StopAt">
+                </div>
+            </div><!--end col-->
+
+            @*developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date*@
+            @*koskila.net/help-my-asp-net-mvc-textbox-date-format-is-wrong/*@
+            @*c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1*@
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.TimeEvent">@faTimeEvent</label>
+                    @*<i class="fas fa-clock icon-sm icons"></i>*@
+                    <input type="time" asp-for="Input.TimeEvent" class="form-control fen" placeholder="">
+                    @*<input type="date" asp-for="" class="form-control fen" placeholder="" min="@Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-" + (DateTime.Now.Day + 1))">*@ @*yyyy-MM-dd*@
+                    <span asp-validation-for="Input.TimeEvent" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative date">
+                    <label asp-for="Input.Countdown">@faCountdown</label>
+                    <i class="fas fa-calendar-alt icon-sm icons"></i>
+                    <input type="text" asp-for="Input.Countdown" class="form-control pl-5 fen" placeholder="">
+                    <span class="input-group-addon"></span>
+                    <span asp-validation-for="Input.Countdown" class="text-danger"></span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="form-group position-relative">
+                    <label asp-for="Input.EmbedLinkGoogleMap">@faEmbedLinkGoogleMap</label>
+                    <i class="fas fa-map icon-sm icons"></i>
+                    <input type="text" asp-for="Input.EmbedLinkGoogleMap" class="form-control pl-5 fen" placeholder="">
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between">
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <div class="form-group mb-0">
+                                <input type="checkbox" asp-for="Input.ActivePassive" class="custom-control-input" id="customSwitch1">
+                                <label asp-for="Input.ActivePassive" class="custom-control-label" for="customSwitch1">@faButtonActivePassive</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+
+
+            <div class="col-lg-12 mb-0">
+                <button class="btn btn-primary btn-block">@faButtonSave</button>
+            </div><!--end col-->
+        </div><!--end row-->
+</form>
+@section Scripts {
+    @await Html.PartialAsync("~/Views/Shared/_UploadJavaScript.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_CKEditorJavaScript.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_DatepickerJavaScript.cshtml")
+    <partial name="_ValidationScriptsPartial" />
+}

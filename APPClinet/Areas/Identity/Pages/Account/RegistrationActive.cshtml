@@ -1,0 +1,36 @@
+﻿@page
+@model RegistrationActiveModel
+@{
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    var faRegistrationActiveTitle = APPClinet.Messages.faMessage.RegistrationActiveTitle.ToString();
+    ViewData["Title"] = faRegistrationActiveTitle;
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faMessageHome = APPClinet.Messages.faMessage.MessageHome.ToString();
+    var faMessageStartFirst = APPClinet.Messages.faMessage.MessageStartFirst.ToString();
+    var faMessageStartLast = APPClinet.Messages.faMessage.MessageStartLast.ToString();
+    var faButtonLogin = APPClinet.Messages.faMessage.ButtonLogin.ToString();
+    var faButtonRegister = APPClinet.Messages.faMessage.ButtonRegister.ToString();
+}
+
+<!-- ERROR PAGE -->
+<section class="section pb-0">
+    <div class="container">
+        <div class="mt-60 pb-5">
+            <div class="row">
+                <div class="col-12 text-center">
+                    @await Html.PartialAsync("~/Views/Shared/fa/Emails/_VerificationEmail.cshtml")
+                    <div class="text-uppercase mt-4 text-danger f25n">لطفاً دوباره تلاش نکنید.</div>
+                    <div class="text-capitalize text-dark mb-4 error-page f30n">کاربر گرامی ایمیل شما قبلاً تایید شده است.</div>
+                    <p class="text-muted para-desc mx-auto mb-0">@faMessageStartFirst&nbsp;<span class="text-primary font-weight-bold">@titleappfa&nbsp;</span>@faMessageStartLast</p>
+                </div><!--end col-->
+                <div class="col-12 text-center">
+                    <a href="/" class="btn btn-primary mt-4 mr-2"><i class="fa fa-home mr-2"></i>@faMessageHome</a>
+                    <a href="/Identity/Account/Login" class="btn btn-outline-secondary mt-4"><i class="fa fa-user mr-2"></i>@faButtonLogin</a>
+                    <a href="/Identity/Account/Register" class="btn btn-outline-secondary mt-4"><i class="fa fa-user-plus mr-2"></i>@faButtonRegister</a>
+                </div>
+            </div><!--end row-->
+        </div>
+    </div><!--end container-->
+</section><!--end section-->
+<!-- ERROR PAGE -->

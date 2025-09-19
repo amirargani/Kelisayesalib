@@ -1,0 +1,194 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.AdminMenusModel
+@using APPClinet.Areas.Identity.Data.Interfaces
+@inject IApplicationUser _iuser
+@{
+    var faMenus = APPClinet.Messages.faMessage.Menus.ToString();
+    ViewData["Title"] = faMenus;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenu = APPClinet.Messages.faMessage.Menu.ToString();
+    var faCategories = APPClinet.Messages.faMessage.Categories.ToString();
+    var faSubCategories = APPClinet.Messages.faMessage.SubCategories.ToString();
+    var faSubCategoriesManage = APPClinet.Messages.faMessage.SubCategoriesManage.ToString();
+    var faAnd = APPClinet.Messages.faMessage.And.ToString();
+
+    var faKelisayesalib = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faMenuEvent = APPClinet.Messages.faMessage.MenuEvent.ToString();
+    var faMenuAbout = faMenu + " " + APPClinet.Messages.faMessage.MenuAbout.ToString();
+    var faMenuCourse = APPClinet.Messages.faMessage.MenuCourse.ToString();
+    var faMenuGallery = APPClinet.Messages.faMessage.MenuGallery.ToString();
+    var faMenuNew = APPClinet.Messages.faMessage.MenuNew.ToString();
+    var faMenuTeam = APPClinet.Messages.faMessage.MenuTeam.ToString();
+    var faCategoryAdd = APPClinet.Messages.faMessage.CategoryAdd.ToString();
+    var faCategoriesView = APPClinet.Messages.faMessage.CategoriesView.ToString();
+    var faCategoriesForExample = APPClinet.Messages.faMessage.CategoriesForExample.ToString();
+    var faSubCategoryAdd = APPClinet.Messages.faMessage.SubCategoryAdd.ToString();
+    var faSubCategoriesView = APPClinet.Messages.faMessage.SubCategoriesView.ToString();
+    var faDetailView = APPClinet.Messages.faMessage.DetailView.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="text-left">@faSubCategoriesManage&nbsp;@faCategories&nbsp;@faAnd&nbsp;@faSubCategories</h2>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+<div class="row">
+    <div class="col-12">
+        <!-- Accordions Start -->
+        <div class="col mt-4 pt-2" id="accordions">
+            <div class="component-wrapper rounded shadow">
+                <div class="p-4 border-bottom">
+                    <h4 class="title mb-0"><i class="fas fa-list-ul mr-2"></i>@faKelisayesalib</h4>
+                </div>
+                <div class="p-4">
+                    <div class="faq-content">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#ollapseone" class="faq position-relative collapsed" aria-expanded="false" aria-controls="ollapseone">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingone">
+                                        <h6 class="title mb-0">@*<span class="text-danger font-weight-bold">@faCategoriesForExample</span>&nbsp;*@<span class="text-primary font-weight-bold">@faMenuEvent</span></h6>
+                                    </div>
+                                </a>
+                                <div id="ollapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/EventCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/EventCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetEventCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/EventSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/EventSubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetEventSubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/EventDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapsetwo" class="faq position-relative collapsed" aria-expanded="false" aria-controls="collapsetwo">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingtwo">
+                                        <h6 class="title mb-0"><span class="text-danger font-weight-bold">@faCategoriesForExample</span>&nbsp;<span class="text-primary font-weight-bold">@faMenuAbout</span></h6>
+                                    </div>
+                                </a>
+                                <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/ChurchCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/ChurchCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetChurchCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/ChurchSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/ChurchSubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetChurchSubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/ChurchDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapsethree" class="faq position-relative collapsed" aria-expanded="false" aria-controls="collapsethree">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingthree">
+                                        <h6 class="title mb-0"><span class="text-danger font-weight-bold">@*@faCategoriesForExample*@</span>&nbsp;<span class="text-primary font-weight-bold">@faMenuCourse</span></h6>
+                                    </div>
+                                </a>
+                                <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/CourseCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/CourseCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetCourseCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/CourseSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/CourseSubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetCourseSubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/CourseDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapsefour" class="faq position-relative collapsed" aria-expanded="false" aria-controls="collapsefour">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingfour">
+                                        <h6 class="title mb-0"><span class="text-danger font-weight-bold">@*@faCategoriesForExample*@</span>&nbsp;<span class="text-primary font-weight-bold">@faMenuNew</span></h6>
+                                    </div>
+                                </a>
+                                <div id="collapsefour" class="collapse" aria-labelledby="headingtfour" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/NewCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/NewCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetNewCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/NewSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/NewSubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetNewSubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/NewDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapsefive" class="faq position-relative collapsed" aria-expanded="false" aria-controls="collapsefive">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingfive">
+                                        <h6 class="title mb-0"><span class="text-danger font-weight-bold">@*@faCategoriesForExample*@</span>&nbsp;<span class="text-primary font-weight-bold">@faMenuGallery</span></h6>
+                                    </div>
+                                </a>
+                                <div id="collapsefive" class="collapse" aria-labelledby="headingtfive" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/GalleryCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/GalleryCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetGalleryCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/GallerySubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/GallerySubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetGallerySubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/GalleryDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 rounded mb-2">
+                                <a data-toggle="collapse" href="#collapsesix" class="faq position-relative collapsed" aria-expanded="false" aria-controls="collapsesix">
+                                    <div class="card-header border-0 bg-light p-3 pr-5" id="headingsix">
+                                        <h6 class="title mb-0"><span class="text-danger font-weight-bold">@*@faCategoriesForExample*@</span>&nbsp;<span class="text-primary font-weight-bold">@faMenuTeam</span></h6>
+                                    </div>
+                                </a>
+                                <div id="collapsesix" class="collapse" aria-labelledby="headingtsix" data-parent="#accordionExample">
+                                    <div class="card-body px-2 py-4">
+                                        <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/TeamCategoryAdd"><i class="fas fa-plus mr-2"></i>@faCategoryAdd</a>
+                                        <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/TeamCategoriesView"><i class="fas fa-eye mr-2"></i>@faCategoriesView</a>
+                                        @if (_iuser.OnGetTeamCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-success font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/TeamSubCategoryAdd"><i class="fas fa-plus mr-2"></i>@faSubCategoryAdd</a>
+                                            <a class="dropdown-item text-info font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/TeamSubCategoriesView"><i class="fas fa-eye mr-2"></i>@faSubCategoriesView</a>
+                                        }
+                                        @if (_iuser.OnGetTeamSubCategories().Count > 0)
+                                        {
+                                            <a class="dropdown-item text-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Details/TeamDetailsView"><i class="fas fa-eye mr-2"></i>@faDetailView</a>
+                                        }
+                                        @*<p class="text-muted mb-0 faq-ans"></p>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+        <!-- Accordions End -->
+    </div>
+</div>

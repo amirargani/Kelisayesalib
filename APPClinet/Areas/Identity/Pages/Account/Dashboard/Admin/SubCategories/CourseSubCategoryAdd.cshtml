@@ -1,0 +1,153 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.SubCategories.CourseSubCategoryAddModel
+@{
+    var faSubCategoryAdd = APPClinet.Messages.faMessage.SubCategoryAdd.ToString();
+    ViewData["Title"] = faSubCategoryAdd;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faSubCategoriesBackView = APPClinet.Messages.faMessage.SubCategoriesBackView.ToString();
+    var faCategorySelect = APPClinet.Messages.faMessage.CategorySelect.ToString();
+    var faTitleSubCategory = APPClinet.Messages.faMessage.TitleSubCategory.ToString();
+    var faDescription = APPClinet.Messages.faMessage.Description.ToString();
+    var faFontName = APPClinet.Messages.faMessage.FontName.ToString();
+    var faButtonActivePassive = APPClinet.Messages.faMessage.ButtonActivePassive.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faSubCategoryAdd</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/SubCategories/CourseSubCategoriesView"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faSubCategoriesBackView</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="coursesubcategoryadd-form mt-4" id="coursesubcategoryadd-form" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.TitleSubCategory">@faCategorySelect</label>
+                <i class="fas fa-list-alt icon-sm icons"></i>
+                <select asp-for="Input.CategoryId" class="form-control custom-select">
+                    @if (Model.categories != null)
+                    {
+                        foreach (var item in Model.categories)
+                        {
+                            <option value="@item.Id">@item.TitleCategory</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.TitleSubCategory">@faTitleSubCategory</label>
+                <i class="fas fa-pencil-alt icon-sm icons"></i>
+                <input type="text" asp-for="Input.TitleSubCategory" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.TitleSubCategory" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Description">@faDescription</label>
+                <i class="fas fa-clipboard-list icon-sm icons"></i>
+                <textarea asp-for="Input.Description" class="form-control pl-5" placeholder="" rows="3"></textarea>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.FontName">@faFontName</label>
+                <i class="fas fa-chess icon-sm icons"></i>
+                <input type="text" asp-for="Input.FontName" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.FontName" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <div class="form-group mb-0">
+                            <input type="checkbox" asp-for="Input.ActivePassive" class="custom-control-input" id="customSwitch1" checked>
+                            <label asp-for="Input.ActivePassive" class="custom-control-label" for="customSwitch1">@faButtonActivePassive</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12 mb-0">
+            <button class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    @*sweetalert2.github.io/*@
+    @*animate.style*@
+    @*bootstrap-notify.remabledesigns.com/*@
+    @*php-flasher.github.io/*@
+    @*codeseven.github.io/toastr/demo.html*@
+    @*onaircode.com/awesome-javascript-alert-box-code-snippet/*@
+    @if (Model.StatusMessage != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '@Model.StatusMessage'
+            })
+        </script>
+        @*How to redirect a request in ASP.NET Core MVC*@
+        @*stackoverflow.com/questions/52107626/asp-net-core-2-how-to-redirecttopage-with-area*@
+        @*infoworld.com/article/3570787/how-to-redirect-a-request-in-aspnet-core-mvc.html*@
+        @*stackoverflow.com/questions/5294842/refresh-a-page-using-javascript-or-html*@
+        @*<script>window.stop();</script>*@
+        @*<script>window.location.reload();</script>*@
+        @*<script>window.location.href = "/Identity/Account/Login"</script>*@
+        @*<script>window.location.href = "/Identity/Account/RegisterConfirmation?email=" + "@Model.NewEmail" + "&returnUrl=%2F"</script>*@
+    }
+    @if (Model.ErrorStatusMessage != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: '@Model.ErrorStatusMessage'
+            })
+        </script>
+    }
+    <partial name="_ValidationScriptsPartial" />
+}
