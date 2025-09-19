@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/lib/images/dist/icons/favicon-32x32.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/lib/images/dist/icons/apple-touch-icon.png" />
+    <!-- Bootstrap Css -->
+    <link href="~/lib/css/dist/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <!-- Other Css -->
+    @RenderSection("Stylesheet", required: false)
+    @await Html.PartialAsync("_CookieConsentCSS")
+    <!-- fa Css -->
+    <link href="~/lib/css/dist/fa/style-rtl.css" rel="stylesheet" />
+    <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/cb94e38c04.js" crossorigin="anonymous"></script>
+    @*https://fontawesome.com/sessions/sign-in*@ @*Email: admin@kelisayesalib.com # Password: Huwfr3IXfvPVVXzo@z7dpsmPU*@
+    @await Html.PartialAsync("_faCrispChat") @*Email: telchat007@gmail.com Password: +A0123456789+A*@
+</head>
+<body>
+    @await Html.PartialAsync("~/Views/Shared/fa/Header/_HeaderFixedNav.cshtml")
+    @RenderBody()
+
+    @await Html.PartialAsync("~/Views/Shared/fa/Footer/_FooterFixed.cshtml")
+    <!-- JavaScript -->
+    @await Html.PartialAsync("_BasicJavaScript")
+    @RenderSection("Scripts", required: false)
+    @await Html.PartialAsync("_faCookieConsentJavaScript")
+    @await Html.PartialAsync("_AppJavaScript")
+</body>
+</html>
+ @*Partial views in ASP.NET Core*@ 
+@*docs.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-3.1*@

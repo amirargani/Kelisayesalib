@@ -1,0 +1,97 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.User.ChangeEmailModel
+@{
+    var faChangeEmail = APPClinet.Messages.faMessage.ChangeEmail.ToString();
+    ViewData["Title"] = faChangeEmail;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/User/_UserNavrtl.cshtml";
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faNewEmail = APPClinet.Messages.faMessage.NewEmail.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="changeemail-form mt-4" id="changeemail-form" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Email">@faEmail</label>
+                <i class="far fa-envelope icon-sm icons"></i>
+                <input type="email" asp-for="Email" class="form-control pl-5 fen" placeholder="" disabled>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.NewEmail">@faNewEmail</label>
+                <i class="fas fa-envelope icon-sm icons"></i>
+                <input type="email" asp-for="Input.NewEmail" class="form-control pl-5 fen" placeholder="">
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12 mb-0">
+            <button asp-page-handler="ChangeEmail" class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    @*sweetalert2.github.io/*@
+    @*animate.style*@
+    @*bootstrap-notify.remabledesigns.com/*@
+    @*php-flasher.github.io/*@
+    @*codeseven.github.io/toastr/demo.html*@
+    @*onaircode.com/awesome-javascript-alert-box-code-snippet/*@
+    @if (Model.StatusMessage != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '@Model.StatusMessage'
+            })
+        </script>
+        @*How to redirect a request in ASP.NET Core MVC*@
+        @*stackoverflow.com/questions/52107626/asp-net-core-2-how-to-redirecttopage-with-area*@
+        @*infoworld.com/article/3570787/how-to-redirect-a-request-in-aspnet-core-mvc.html*@
+        @*stackoverflow.com/questions/5294842/refresh-a-page-using-javascript-or-html*@
+        @*<script>window.stop();</script>*@
+        @*<script>window.location.reload();</script>*@
+        @*<script>window.location.href = "/Identity/Account/Login"</script>*@
+        @*<script>window.location.href = "/Identity/Account/RegisterConfirmation?email=" + "@Model.NewEmail" + "&returnUrl=%2F"</script>*@
+    }
+    @if (Model.ErrorStatusMessage != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: '@Model.ErrorStatusMessage'
+            })
+        </script>
+}
+    <partial name="_ValidationScriptsPartial" />
+}

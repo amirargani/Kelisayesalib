@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+}
+
+@await Html.PartialAsync("~/Views/Shared/fa/faHome/_Start.cshtml")
+
+
+@section Scripts {
+    @*jqueryscript.net/other/Awesome-Video-Background-Plugin-with-HTML5-Youtube-API-YTPlayer.html*@
+    <!-- YTPlayer -->
+    <script src="~/lib/js/dist/jquery.mb.YTPlayer.min.js"></script>
+    <script>
+        $(".player").mb_YTPlayer();
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@{
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faButtonLogin = APPClinet.Messages.faMessage.ButtonLogin.ToString();
+    var faButtonRegister = APPClinet.Messages.faMessage.ButtonRegister.ToString();
+}
+<!-- Navbar STart -->
+<header id="topnav" class="defaultscroll sticky bg-white">
+    <div class="container">
+        <!-- Logo container-->
+        <div>
+            <a class="logo" href="/">
+                @*<img src="~/lib/images/dist/logos/logo.png" height="48" alt="" />*@
+                @await Html.PartialAsync("~/Views/Shared/fa/Logos/_Logo48.cshtml")
+                <span class="font-weight-bold d-none d-block">@titleappfa</span>
+            </a>
+        </div>
+        @*<div class="buy-button">
+            <a href="#" target="_blank" class="btn btn-danger disabled">Live<i class="ml-2 fa fa-wifi"></i></a>
+        </div><!--end login button-->*@
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+        <div id="navigation">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu">
+                <li><a href="/">خـانه</a></li>
+                @await Html.PartialAsync("~/Views/Shared/_HMenus.cshtml")
+                @await Html.PartialAsync("~/Views/Shared/_faLoginPartial.cshtml")
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</header><!--end header-->
+<!-- Navbar End -->

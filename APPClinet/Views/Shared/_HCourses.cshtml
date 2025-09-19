@@ -1,0 +1,38 @@
+﻿@using APPClinet.Areas.Identity.Data.Interfaces
+@inject IApplicationUser _iuser
+
+@* CourseCategories & CourseSubCategories *@
+@{
+    foreach (var item in _iuser.OnGetCourseCategories().OrderBy(a => a.Position))
+    {
+        if (item.ActivePassive == true)
+        {
+            <li class="has-submenu">
+                @if (item.FontName == null)
+                {
+                    <a href="javascript:void(0)">@item.TitleCategory</a><span class="submenu-arrow"></span>
+                }
+                else
+                {
+                    <a href="javascript:void(0)"><i class="@item.FontName mr-2"></i>@item.TitleCategory</a><span class="submenu-arrow"></span>
+                }
+                <ul class="submenu">
+                    @foreach (var itemsub in _iuser.OnGetCourseSubCategories().Where(sub => sub.CategoryId == item.Id).OrderBy(a => a.Position))
+                    {
+                        if (itemsub.ActivePassive == true)
+                        {
+                            @if (itemsub.FontName == null)
+                            {
+                                <li><a href="/Identity/Search/Details/CourseDetailsView?titlesubcategory=@itemsub.TitleSubCategory">@itemsub.TitleSubCategory</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Identity/Search/Details/CourseDetailsView?titlesubcategory=@itemsub.TitleSubCategory"><i class="@itemsub.FontName mr-2"></i>@itemsub.TitleSubCategory</a></li>
+                            }
+                        }
+                    }
+                </ul>
+            </li>
+        }
+    }
+}

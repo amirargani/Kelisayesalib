@@ -1,0 +1,72 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@{
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var faUserProfile = APPClinet.Messages.faMessage.UserProfile.ToString();
+    var faChangePassword = APPClinet.Messages.faMessage.ChangePassword.ToString();
+    var faChangeEmail = APPClinet.Messages.faMessage.ChangeEmail.ToString();
+    var faSettings = APPClinet.Messages.faMessage.Settings.ToString();
+    var faMenus = APPClinet.Messages.faMessage.Menus.ToString();
+}
+
+@section Stylesheet {
+    @await Html.PartialAsync("~/Views/Shared/_DatepickerCSS.cshtml")
+    @*pictogrammers.github.io/@mdi/font/5.3.45/*@
+    @*materialdesignicons.com*@
+    @*material.io/resources/icons/?style=baseline*@
+    @*github.com/marella/material-icons/tree/master/iconfont*@
+    @*github.com/Templarian/MaterialDesign-Webfont*@
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+    <link href="~/lib/css/dist/fancybox/jquery.fancybox.min.css" rel="stylesheet" />
+}
+
+<!-- Hero Start -->
+<section class="bg-half bg-white d-table w-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-left">
+                <div class="page-next-level">
+                    <div class="col mt-2 pt-2">
+                        <div class="p-0">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="list-group" role="tablist">
+                                        <a class="list-group-item list-group-item-action fxl" href="/Identity/Account/Dashboard/Admin/Index" role="tab"><i class="fas fa-address-card mr-2"></i>@faUserProfile</a>
+                                        <a class="list-group-item list-group-item-action fxl" href="/Identity/Account/Dashboard/Admin/ChangePassword" role="tab"><i class="fas fa-key mr-2"></i>@faChangePassword</a>
+                                        <a class="list-group-item list-group-item-action fxl" href="/Identity/Account/Dashboard/Admin/ChangeEmail" role="tab"><i class="fas fa-mail-bulk mr-2"></i>@faChangeEmail</a>
+                                        <a class="list-group-item list-group-item-action fxl" href="/Identity/Account/Dashboard/Admin/Menus" role="tab"><i class="fas fa-th-list mr-2"></i>@faMenus</a>
+                                        <a class="list-group-item list-group-item-action fxl" href="/Identity/Account/Dashboard/Admin/Settings" role="tab"><i class="fas fa-cog mr-2"></i>@faSettings</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 p-2">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" role="tabpanel">
+                                            @RenderBody()
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+@section Scripts { <!--ctrl + k und d-->
+    @RenderSection("Scripts", required: false)
+    @* getbootstrap.com / docs / 4.6 / components / list - group/*@
+    @*$('#myList a[href="/Identity/Account/Dashboard/Admin"]').tab('show');*@
+    <script>
+        var current = location.pathname;
+        $('.list-group a').each(function () {
+            var $this = $(this);
+            if (current.indexOf($this.attr('href')) !== -1) {
+                $this.addClass('active');
+            }
+        })
+    </script>
+    <!-- Fancybox -->
+    <script src="~/lib/js/dist/fancybox/jquery.fancybox.min.js"></script>
+}

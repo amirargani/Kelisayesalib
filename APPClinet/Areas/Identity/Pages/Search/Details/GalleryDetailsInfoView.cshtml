@@ -1,0 +1,267 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Search.Details.GalleryDetailsInfoViewModel
+@{
+    ViewData["Title"] = Model.Input.Title;
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    var faTitleMap = APPClinet.Messages.faMessage.TitleMap.ToString();
+    var faClose = APPClinet.Messages.faMessage.Close.ToString();
+    string image = null;
+    var faShare = APPClinet.Messages.faMessage.Share.ToString();
+    string pagelink = Url.ActionLink().Replace("/Search/Details/GalleryDetailsInfoView", "/ShortUrl/GDIV").ToString() + "?pageid=" + Model.Input.Id;
+}
+
+@section Stylesheet {
+    @*await Html.PartialAsync("~/Views/Shared/_xxxCSS.cshtml")*@
+    <link href="~/lib/css/dist/fancybox/jquery.fancybox.min.css" rel="stylesheet" />
+}
+
+@{
+    @if (Model.Input.Image != null)
+    {
+        image = "/uploads/images/details/galleries/" + Model.Input.Image;
+    }
+    @if (Model.Input.Image == null)
+    {
+        image = "/uploads/images/details/default/default.jpg";
+    }
+}
+
+<!-- Hero Start -->
+<section class="bg-half-260 bg-primary d-table w-100" style="background: url('@image') center center;background-size: cover;margin-top: 82px;" id="home">
+    <div class="bg-overlay"></div>
+</section><!--end section-->
+<!-- Hero End -->
+<!-- Hero Start -->
+<section class="section pt-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next">
+                    <div aria-label="breadcrumb" class="d-inline-block">
+                        <div class="breadcrumb bg-white rounded shadow mb-0">
+                            <div class="breadcrumb-item"><strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleCategory</strong>&nbsp;&nbsp;<strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleSubCategory</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+<!-- Section Start -->
+<section class="section pt-md-4 pt-5">
+    <!-- Start Features -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sidebar sticky-bar rounded shadow">
+                    <div class="card border-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/uploads/images/details/galleries/@Model.Input.ImageLink" class="img-fluid" alt="...">
+                                @*<div class="col-12 mt-5 mb-5">
+                                    </div>*@
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Input.Title</h5>
+                                    @*<div class="card-text text-justify f18n">@Html.Raw(Model.Input.Text)</div>*@
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(Model.Input.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@Model.Input.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;@if (Model.Input.CountViews < 1)
+                                            {<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (Model.Input.CountViews > 0)
+                                            {<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@Model.Input.CountViews</span>}
+                                        </small>
+                                    </p>
+                                    @if (Model.Input.PrivateNumber != null || Model.Input.PhoneNumber != null || Model.Input.Email != null)
+                                    {
+                                        <ul class="list-inline mb-0 mt-3">
+                                            @if (Model.Input.PrivateNumber != null)
+                                            {
+                                                <li class="fen">
+                                                    <a href="tel:@Model.Input.PrivateNumber" class="mt-4 mr-2 ml-2 f16 text-dark mb-3">@Model.Input.PrivateNumber<i class="fas fa-phone mr-2"></i></a>
+                                                </li>
+
+                                            }
+                                            @if (Model.Input.PhoneNumber != null)
+                                            {
+                                                <li class="fen">
+                                                    <a href="tel:@Model.Input.PhoneNumber" class="mt-4 mr-2 ml-2 f16 text-dark mb-3">@Model.Input.PhoneNumber<i class="fas fa-mobile mr-2"></i></a>
+                                                </li>
+
+                                            }
+                                            @if (Model.Input.Email != null)
+                                            {
+                                                <li class="fen">
+                                                    <a href="mailto:@Model.Input.Email" class="mt-4 mr-2 ml-2 f16 text-dark mb-3 fen">@Model.Input.Email<i class="fas fa-envelope mr-2"></i></a>
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    }
+                                    @if (Model.Input.Facebook != null || Model.Input.Twitter != null || Model.Input.Instagram != null || Model.Input.Telegram != null || Model.Input.Website != null || Model.Input.EmbedLinkGoogleMap != null)
+                                    {
+                                        <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                                            @if (Model.Input.Facebook != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Facebook" target="_blank" class="btn btn-icon btn-primary"><i class="fa fa-facebook"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.Twitter != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Twitter" target="_blank" class="btn btn-icon btn-info"><i class="fa fa-twitter"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.Instagram != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Instagram" target="_blank" class="btn btn-icon btn-dark"><i class="fa fa-instagram"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.Youtube != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Youtube" target="_blank" class="btn btn-icon btn-danger"><i class="fa fa-youtube-play"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.Telegram != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Telegram" target="_blank" class="btn btn-icon btn-blue"><i class="fa fa-paper-plane"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.Website != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="@Model.Input.Website" target="_blank" class="btn btn-icon btn-light"><i class="fa fa-home"></i></a>
+                                                </li>
+                                            }
+                                            @if (Model.Input.EmbedLinkGoogleMap != null)
+                                            {
+                                                <li class="list-inline-item">
+                                                    <a href="#" data-toggle="modal" data-target="#Map" class="btn btn-icon btn-secondary"><i class="fas fa-map-marker-alt"></i></a>
+                                                </li>
+                                            }
+                                        </ul><!--end icon-->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+    <!-- End Features -->
+</section><!--end section-->
+<!-- Section End -->
+@if (Model.Input.Text != null || Model.Input.YoutubeLink != null || Model.galleryImages.Count > 0)
+{
+    <!-- Section Start -->
+    <section class="section pt-md-4 pt-5">
+        <!-- Start Features -->
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <div class="sidebar sticky-bar rounded shadow">
+                        <div class="card border-0">
+                            <div class="row no-gutters">
+                                @*https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed*@
+                                @if (Model.Input.YoutubeLink != null)
+                                {
+                                    <div class="col-md-12">
+                                        <div class="youtube">
+                                            <iframe src="https://www.youtube.com/embed/@Model.Input.YoutubeLink" class="youtubeiframe" title="@Model.Input.YoutubeLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                        <div class="card-text text-justify f18n">@Html.Raw(Model.Input.Text)</div>
+                                        @if (Model.galleryImages.Count > 0)
+                                        {
+                                            <div class="row imglist">
+                                                @foreach (var item in Model.galleryImages.OrderBy(a => a.Position))
+                                                {
+                                                    <div class="col-lg-3 mt-3 mb-3">
+                                                        <div class="card shadow rounded overflow-hidden container-fluid">
+                                                            <a href="/uploads/images/details/galleries/@item.Image" data-fancybox data-caption="@Model.Input.Title" class="plus">
+                                                                <input type="hidden" name="id" id="id" value="@item.Id" />
+                                                                <img src="/uploads/images/details/galleries/@item.Image" class="img-fluid" alt="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
+                <div class="col-lg-12">
+                    <div class="text-left">
+                        <div class="f18n mt-5">
+                            <strong>@faShare</strong>
+                        </div>
+                        <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=@pagelink" target="_blank" class="btn btn-icon btn-outline-primary"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="http://twitter.com/share?text=@pagelink" target="_blank" class="btn btn-icon btn-outline-info"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://telegram.me/share/url?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-blue"><i class="fa fa-paper-plane"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://api.whatsapp.com/send/?phone&text=@pagelink" target="_blank" class="btn btn-icon btn-outline-success"><i class="fa fa-whatsapp"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-dark"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul><!--end icon-->
+                    </div>
+                </div>
+            </div><!--end row-->
+        </div><!--end container-->
+        <!-- End Features -->
+    </section><!--end section-->
+    <!-- Section End -->
+}
+@if (Model.Input.EmbedLinkGoogleMap != null)
+{
+    <!-- Map start -->
+    @*getbootstrap.com/docs/4.5/components/modal/*@
+    <div class="modal fade" id="Map" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@faTitleMap</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="bg-white p-0 rounded box-shadow">
+                        <div class="py-0">
+                            <iframe src="@Model.Input.EmbedLinkGoogleMap" style="width: 100%; min-height: 25vh; border:0;" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">@faClose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Map end -->
+}
+@section Scripts {
+    <!-- Fancybox -->
+    <script src="~/lib/js/dist/fancybox/jquery.fancybox.min.js"></script>
+    @await Html.PartialAsync("~/Views/Shared/_GalleryImagesMinJavaScript.cshtml")
+}

@@ -1,0 +1,329 @@
+﻿@using APPClinet.Areas.Identity.Data.Interfaces
+@inject IApplicationUser _iuser
+@{
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faMVCT = APPClinet.Messages.faMessage.MostVisited.ToString() + " " + APPClinet.Messages.faMessage.CoursesText.ToString();
+    var faTNCT = APPClinet.Messages.faMessage.TheNewest.ToString() + " " + APPClinet.Messages.faMessage.CoursesText.ToString();
+    var faTNNT = APPClinet.Messages.faMessage.TheNewest.ToString() + " " + APPClinet.Messages.faMessage.NewsText.ToString();
+    var faTNGT = APPClinet.Messages.faMessage.TheNewest.ToString() + " " + APPClinet.Messages.faMessage.GalleryText.ToString();
+    var faWebsite = APPClinet.Messages.faMessage.Website.ToString();
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faPhoneNumber = APPClinet.Messages.faMessage.PhoneNumber.ToString();
+    var faPrivateNumber = APPClinet.Messages.faMessage.PrivateNumber.ToString();
+    var faMap = APPClinet.Messages.faMessage.Map.ToString();
+    var faTitleMap = APPClinet.Messages.faMessage.TitleMap.ToString();
+    var faClose = APPClinet.Messages.faMessage.Close.ToString();
+    string image = null;
+    string countdown = null;
+}
+
+@{
+    foreach (var item in _iuser.OnGetEventDetails().OrderBy(a => a.Position).Take(1))
+    {
+        if (item.ActivePassive == true)
+        {
+            countdown = item.Countdown;
+            @if (item.Image != null)
+            {
+                image = "/uploads/images/details/events/" + item.Image;
+            }
+            @if (item.Image == null)
+            {
+                image = "/uploads/images/details/default/default.jpg";
+            }
+            <!-- COMING SOON PAGE -->
+            <section class="bg-home bg-animation-left dark-left d-flex align-items-center" data-jarallax='{"speed": 0.5}' style="background-image: url('@image');" id="home">
+                @if (item.YoutubeLink != null)
+                {
+                    <a id="video" class="player" data-property="{videoURL:'@item.YoutubeLink',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:@item.StartAt, stopAt:@item.StopAt, opacity:1, quality:'small'}"></a>
+                }
+                <div class="container position-relative text-md-left text-center" style="z-index: 1;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @await Html.PartialAsync("~/Views/Shared/fa/Logos/_Logo64.cshtml")
+                            <span class="ml-2 display-5 text-white font-weight-bold mb-3">@titleappfa</span>
+                            <h4 class="title mb-4 para-desc bg-yellow para-dark font-weight-bold"><strong>@_iuser.ExistsEventDetailsTitlesubcategory(Convert.ToInt32(item.SubCategoryId), null)</strong></h4>
+                            @if (item.Facebook != null)
+                            {
+                                <a href="@item.Facebook" target="_blank" class="btn btn-icon btn-primary"><i class="fa fa-facebook"></i></a>
+                            }
+                            @if (item.Twitter != null)
+                            {
+                                <a href="@item.Twitter" target="_blank" class="btn btn-icon btn-info"><i class="fa fa-twitter"></i></a>
+                            }
+                            @if (item.Instagram != null)
+                            {
+                                <a href="@item.Instagram" target="_blank" class="btn btn-icon btn-dark"><i class="fa fa-instagram"></i></a>
+                            }
+                            @if (item.Youtube != null)
+                            {
+                                <a href="@item.Youtube" target="_blank" class="btn btn-icon btn-danger"><i class="fa fa-youtube-play"></i></a>
+                            }
+                            @if (item.Telegram != null)
+                            {
+                                <a href="@item.Telegram" target="_blank" class="btn btn-icon btn-blue"><i class="fa fa-paper-plane"></i></a>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mt-3">
+                                @*codeproject.com/questions/615140/converting-dd-mm-yyyy-to-mm-dd-yyyy-in-asp-net*@
+                                <span class="ml-2 f15 text-white mb-3 fen"><strong><i class="fas fa-calendar-alt f25 mr-2"></i>@DateTime.ParseExact(item.Countdown.Trim(), "yyyy/MM/dd", null).ToString("dd/MM/yyyy")</strong></span>
+                                <span class="ml-2 f25 text-white mb-3"><strong>|&nbsp;&nbsp;@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Countdown), "dddd dd MMMM yyyy")</strong></span>
+                                <span class="ml-2 f15 text-white mb-3"><strong>|&nbsp;&nbsp;<i class="fas fa-clock mr-2"></i>@item.TimeEvent</strong></span>
+                            </div>
+                            <div class="mt-1">
+                                @if (item.PrivateNumber != null)
+                                {
+                                    <div class="fen"><a href="tel:@item.PrivateNumber" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@item.PrivateNumber</a><span class="text-white f18 ffa">:@faPrivateNumber<i class="fas fa-phone mr-2"></i></span></div>
+                                }
+                                @if (item.PhoneNumber != null)
+                                {
+                                    <div class="fen"><a href="tel:@item.PhoneNumber" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@item.PhoneNumber</a><span class="text-white f18 ffa">:@faPhoneNumber<i class="fas fa-mobile mr-2"></i></span></div>
+                                }
+                                @if (item.Email != null)
+                                {
+                                    <div class="fen"><a href="mailto:@item.Email" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@item.Email</a><span class="text-white f18 ffa">:@faEmail<i class="fas fa-envelope mr-2"></i></span></div>
+                                }
+                            </div>
+                            <div id="countdown"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (item.Website != null)
+                            {
+                                <a href="@item.Website" target="_blank" class="btn btn-light mt-4 mr-2"><i class="fa fa-home mr-2"></i>@faWebsite</a>
+                            }
+                            @if (item.EmbedLinkGoogleMap != null)
+                            {
+                                <a href="#" data-toggle="modal" data-target="#Map" class="btn btn-secondary mt-4 mr-2"><i class="fas fa-map-marker-alt mr-2"></i>@faMap</a>
+                            }
+                        </div>
+                    </div>
+                </div><!-- end container -->
+            </section><!--end section-->
+            <!-- COMING SOON PAGE -->
+            @if (item.EmbedLinkGoogleMap != null)
+            {
+                <!-- Map start -->
+                @*getbootstrap.com/docs/4.5/components/modal/*@
+                <div class="modal fade" id="Map" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">@faTitleMap</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="bg-white p-0 rounded box-shadow">
+                                    <div class="py-0">
+                                        <iframe src="@item.EmbedLinkGoogleMap" style="width: 100%; min-height: 25vh; border:0;" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">@faClose</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Map end -->
+            }
+        }
+    }
+}
+@if (_iuser.OnGetCourseDetails().OrderByDescending(u => u.CountViews).Where(u => u.CountViews >= 1 && u.ActivePassive == true).Take(1).FirstOrDefault() != null)
+{
+    <!-- Section Start -->
+    <section class="section pb-0">
+        <div class="container">
+            <div class="mt-60">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-0">@faMVCT</h5>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in _iuser.OnGetCourseDetails().Where(u => u.ActivePassive == true && u.CountViews >= 1).OrderByDescending(u => u.CountViews).Take(12))
+                    {
+                        <div class="col-lg-4 col-md-6 mt-4 mb-4 pb-2">
+                            <div class="card blog rounded border-0 shadow overflow-hidden">
+                                <div class="position-relative">
+                                    <img src="/uploads/images/details/courses/@item.ImageLink" class="card-img-top" alt="@item.Title">
+                                    <div class="overlay rounded-top bg-dark"></div>
+                                </div>
+                                <div class="content p-3">
+                                    <h6><a href="/Identity/Search/Details/CourseDetailsInfoView?id=@item.Id&title=@item.Title.Replace(" ", "§").ToString()" class="card-title text-dark">@item.Title</a></h6>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item mr-2 mb-0"> @if (item.CountViews == null){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (item.CountViews > 0){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@item.CountViews</span>}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    @*<small class="text-light user d-block"><i class="mdi mdi-account"></i></small>*@
+                                    <small class="text-light date"><i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@item.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!--end container-->
+    </section><!--end section-->
+}
+@if (_iuser.OnGetCourseDetails().OrderByDescending(u => u.ActivePassive).Where(u => u.ActivePassive == true).Take(1).FirstOrDefault() != null)
+{
+    <!-- Section Start -->
+    <section class="section pb-0">
+        <div class="container">
+            <div class="mt-60">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-0">@faTNCT</h5>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in _iuser.OnGetCourseDetails().Where(u => u.ActivePassive == true).OrderByDescending(u => u.Date).Take(6))
+                    {
+                        <div class="col-lg-4 col-md-6 mt-4 mb-4 pb-2">
+                            <div class="card blog rounded border-0 shadow overflow-hidden">
+                                <div class="position-relative">
+                                    <img src="/uploads/images/details/courses/@item.ImageLink" class="card-img-top" alt="@item.Title">
+                                    <div class="overlay rounded-top bg-dark"></div>
+                                </div>
+                                <div class="content p-3">
+                                    <h6><a href="/Identity/Search/Details/CourseDetailsInfoView?id=@item.Id&title=@item.Title.Replace(" ", "§").ToString()" class="card-title text-dark">@item.Title</a></h6>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item mr-2 mb-0"> @if (item.CountViews == null){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (item.CountViews > 0){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@item.CountViews</span>}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    @*<small class="text-light user d-block"><i class="mdi mdi-account"></i></small>*@
+                                    <small class="text-light date"><i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@item.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!--end container-->
+    </section><!--end section-->
+}
+@if (_iuser.OnGetNewDetails().OrderByDescending(u => u.ActivePassive).Where(u => u.ActivePassive == true).Take(1).FirstOrDefault() != null)
+{
+    <!-- Section Start -->
+    <section class="section pb-0">
+        <div class="container">
+            <div class="mt-60">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-0">@faTNNT</h5>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in _iuser.OnGetNewDetails().Where(u => u.ActivePassive == true).OrderByDescending(u => u.Date).Take(12))
+                    {
+                        <div class="col-lg-4 col-md-6 mt-4 mb-4 pb-2">
+                            <div class="card blog rounded border-0 shadow overflow-hidden">
+                                <div class="position-relative">
+                                    <img src="/uploads/images/details/news/@item.ImageLink" class="card-img-top" alt="@item.Title">
+                                    <div class="overlay rounded-top bg-dark"></div>
+                                </div>
+                                <div class="content p-3">
+                                    <h6><a href="/Identity/Search/Details/NewDetailsInfoView?id=@item.Id&title=@item.Title.Replace(" ", "§").ToString()" class="card-title text-dark">@item.Title</a></h6>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item mr-2 mb-0"> @if (item.CountViews == null){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (item.CountViews > 0){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@item.CountViews</span>}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    @*<small class="text-light user d-block"><i class="mdi mdi-account"></i></small>*@
+                                    <small class="text-light date"><i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@item.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!--end container-->
+    </section><!--end section-->
+}
+@if (_iuser.OnGetGalleryDetails().OrderByDescending(u => u.ActivePassive).Where(u => u.ActivePassive == true).Take(1).FirstOrDefault() != null)
+{
+    <!-- Section Start -->
+    <section class="section pb-0">
+        <div class="container">
+            <div class="mt-60">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-0">@faTNGT</h5>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in _iuser.OnGetGalleryDetails().Where(u => u.ActivePassive == true).OrderByDescending(u => u.Date).Take(12))
+                    {
+                        <div class="col-lg-4 col-md-6 mt-4 mb-4 pb-2">
+                            <div class="card blog rounded border-0 shadow overflow-hidden">
+                                <div class="position-relative">
+                                    <img src="/uploads/images/details/galleries/@item.ImageLink" class="card-img-top" alt="@item.Title">
+                                    <div class="overlay rounded-top bg-dark"></div>
+                                </div>
+                                <div class="content p-3">
+                                    <h6><a href="/Identity/Search/Details/GalleryDetailsInfoView?id=@item.Id&title=@item.Title.Replace(" ", "§").ToString()" class="card-title text-dark">@item.Title</a></h6>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item mr-2 mb-0"> @if (item.CountViews == null){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (item.CountViews > 0){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@item.CountViews</span>}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    @*<small class="text-light user d-block"><i class="mdi mdi-account"></i></small>*@
+                                    <small class="text-light date"><i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@item.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!--end container-->
+    </section><!--end section-->
+}
+@section Scripts {
+    @*jqueryscript.net/other/Awesome-Video-Background-Plugin-with-HTML5-Youtube-API-YTPlayer.html*@
+    <!-- YTPlayer -->
+    <script src="~/lib/js/dist/jquery.mb.YTPlayer.min.js"></script>
+    <script>
+        $(".player").mb_YTPlayer();
+    </script>
+    <!-- Countdown -->
+    <script src="~/lib/js/dist/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript">
+        $('#countdown').countdown('@countdown', function (event) {
+            var $this = $(this).html(event.strftime(''
+                + '<div class="count-down"><span class="count-number">%D</span><span class="count-head position-relative d-block">روز</span></div> '
+                + '<div class="count-down"><span class="count-number">%H</span><span class="count-head position-relative d-block">ساعت</span></div> '
+                + '<div class="count-down"><span class="count-number">%M</span><span class="count-head position-relative d-block">دقیقه</span></div> '
+                + '<div class="count-down"><span class="count-number">%S</span><span class="count-head position-relative d-block">ثانیه</span></div>'
+            ));
+        });
+    </script>
+}
+@*stackoverflow.com/questions/21447269/how-to-limit-the-length-of-text-in-a-paragraph*@

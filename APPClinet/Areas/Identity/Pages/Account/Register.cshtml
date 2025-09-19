@@ -1,0 +1,63 @@
+﻿@page
+@model RegisterModel
+@{
+    var faTitleRegister = APPClinet.Messages.faMessage.TitleRegister.ToString();
+    ViewData["Title"] = faTitleRegister;
+    Layout = "~/Areas/Identity/Pages/Account/_AuthrtlLayout.cshtml";
+    var faWith = APPClinet.Messages.faMessage.With.ToString();
+    var faButtonRegister = APPClinet.Messages.faMessage.ButtonRegister.ToString();
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faPassword = APPClinet.Messages.faMessage.Password.ToString();
+    var faConfirmPassword = APPClinet.Messages.faMessage.ConfirmPassword.ToString();
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+}
+
+<!-- Hero Start -->
+<div class="row">
+    <div class="col-12">
+        <div class="card login-page border-0 shadow" style="z-index: 1">
+            <div class="card-body p-5">
+                <h6 class="card-title text-center mb-0">@faTitleRegister&nbsp;<span class="text-primary font-weight-bold">@titleappfa</span></h6>
+                <form class="register-form mt-4" id="register-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group position-relative">
+                                <label asp-for="Input.Email">@faEmail</label>
+                                <i class="far fa-envelope icon-sm icons"></i>
+                                <input type="email" asp-for="Input.Email" class="form-control pl-5 fen" placeholder="">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-lg-12">
+                            <div class="form-group position-relative">
+                                <label asp-for="Input.Password">@faPassword</label>
+                                <i class="fas fa-lock icon-sm icons"></i>
+                                <input type="password" asp-for="Input.Password" class="form-control pl-5 fen" placeholder="">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-lg-12">
+                            <div class="form-group position-relative">
+                                <label asp-for="Input.ConfirmPassword">@faConfirmPassword</label>
+                                <i class="fas fa-lock icon-sm icons text-danger"></i>
+                                <input asp-for="Input.ConfirmPassword" class="form-control pl-5 fen" placeholder="">
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-lg-12 mb-0">
+                            <button class="btn btn-primary btn-block">@faButtonRegister</button>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </form>
+            </div>
+        </div>
+    </div><!--end col-->
+</div><!--end row-->
+<!-- Hero End -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,191 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Search.Details.EventDetailsViewModel
+@{
+    ViewData["Title"] = Model.Input.TitleSubCategory;
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    var titleappen = APPClinet.Messages.TitleApp.app_en.ToString();
+    var titleappfa = APPClinet.Messages.TitleApp.app_fa.Replace(" - ", "").ToString();
+    var faWebsite = APPClinet.Messages.faMessage.Website.ToString();
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faPhoneNumber = APPClinet.Messages.faMessage.PhoneNumber.ToString();
+    var faPrivateNumber = APPClinet.Messages.faMessage.PrivateNumber.ToString();
+    var faMap = APPClinet.Messages.faMessage.Map.ToString();
+    var faTitleMap = APPClinet.Messages.faMessage.TitleMap.ToString();
+    var faClose = APPClinet.Messages.faMessage.Close.ToString();
+    string image = null;
+    var faShare = APPClinet.Messages.faMessage.Share.ToString();
+    string pagelink = Url.ActionLink().Replace("/Search/Details/EventDetailsView", "/ShortUrl/EVDV").ToString() + "?pageid=" + Model.Input.Id;
+
+}
+
+@{
+    @if (Model.Input.Image != null)
+    {
+        image = "/uploads/images/details/events/" + Model.Input.Image;
+    }
+    @if (Model.Input.Image == null)
+    {
+        image = "/uploads/images/details/default/default.jpg";
+    }
+}
+
+<!-- COMING SOON PAGE -->
+<section class="bg-home bg-animation-left dark-left d-flex align-items-center" data-jarallax='{"speed": 0.5}' style="background-image: url('@image');" id="home">
+    @if (Model.Input.YoutubeLink != null)
+    {
+        <a id="video" class="player" data-property="{videoURL:'@Model.Input.YoutubeLink',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:@Model.Input.StartAt, stopAt:@Model.Input.StopAt, opacity:1, quality:'small'}"></a>
+    }
+    <div class="container position-relative text-md-left text-center" style="z-index: 1;">
+        <div class="row">
+            <div class="col-md-12">
+                @await Html.PartialAsync("~/Views/Shared/fa/Logos/_Logo64.cshtml")
+                <span class="ml-2 display-5 text-white font-weight-bold mb-3">@titleappfa</span>
+                <h4 class="title mb-4 para-desc bg-yellow para-dark font-weight-bold"><strong>@Model.Input.TitleSubCategory</strong></h4>
+                @if (Model.Input.Facebook != null)
+                {
+                    <a href="@Model.Input.Facebook" target="_blank" class="btn btn-icon btn-primary"><i class="fa fa-facebook"></i></a>
+                }
+                @if (Model.Input.Twitter != null)
+                {
+                    <a href="@Model.Input.Twitter" target="_blank" class="btn btn-icon btn-info"><i class="fa fa-twitter"></i></a>
+                }
+                @if (Model.Input.Instagram != null)
+                {
+                    <a href="@Model.Input.Instagram" target="_blank" class="btn btn-icon btn-dark"><i class="fa fa-instagram"></i></a>
+                }
+                @if (Model.Input.Youtube != null)
+                {
+                    <a href="@Model.Input.Youtube" target="_blank" class="btn btn-icon btn-danger"><i class="fa fa-youtube-play"></i></a>
+                }
+                @if (Model.Input.Telegram != null)
+                {
+                    <a href="@Model.Input.Telegram" target="_blank" class="btn btn-icon btn-blue"><i class="fa fa-paper-plane"></i></a>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mt-3">
+                    @*codeproject.com/questions/615140/converting-dd-mm-yyyy-to-mm-dd-yyyy-in-asp-net*@
+                    <span class="ml-2 f15 text-white mb-3 fen"><strong><i class="fas fa-calendar-alt f25 mr-2"></i>@DateTime.ParseExact(Model.Input.Countdown.Trim(), "yyyy/MM/dd", null).ToString("dd/MM/yyyy")</strong></span>
+                    <span class="ml-2 f25 text-white mb-3"><strong>|&nbsp;&nbsp;@ShamsiPlugin.ToPeString(Convert.ToDateTime(Model.Input.Countdown), "dddd dd MMMM yyyy")</strong></span>
+                    <span class="ml-2 f15 text-white mb-3"><strong>|&nbsp;&nbsp;<i class="fas fa-clock mr-2"></i>@Model.Input.TimeEvent</strong></span>
+                </div>
+                <div class="mt-1">
+                    @if (Model.Input.PrivateNumber != null)
+                    {
+                        <div class="fen"><a href="tel:@Model.Input.PrivateNumber" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@Model.Input.PrivateNumber</a><span class="text-white f18 ffa">:@faPrivateNumber<i class="fas fa-phone mr-2"></i></span></div>
+                    }
+                    @if (Model.Input.PhoneNumber != null)
+                    {
+                        <div class="fen"><a href="tel:@Model.Input.PhoneNumber" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@Model.Input.PhoneNumber</a><span class="text-white f18 ffa">:@faPhoneNumber<i class="fas fa-mobile mr-2"></i></span></div>
+                    }
+                    @if (Model.Input.Email != null)
+                    {
+                        <div class="fen"><a href="mailto:@Model.Input.Email" class="mt-4 mr-2 ml-2 f16 text-white mb-3">@Model.Input.Email</a><span class="text-white f18 ffa">:@faEmail<i class="fas fa-envelope mr-2"></i></span></div>
+                    }
+                </div>
+                <div id="countdown"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model.Input.Website != null)
+                {
+                    <a href="@Model.Input.Website" target="_blank" class="btn btn-light mt-4 mr-2"><i class="fa fa-home mr-2"></i>@faWebsite</a>
+                }
+                @if (Model.Input.EmbedLinkGoogleMap != null)
+                {
+                    <a href="#" data-toggle="modal" data-target="#Map" class="btn btn-secondary mt-4 mr-2"><i class="fas fa-map-marker-alt mr-2"></i>@faMap</a>
+                }
+            </div>
+        </div>
+    </div><!-- end container -->
+</section><!--end section-->
+<!-- COMING SOON PAGE -->
+<!-- Section Start -->
+<section class="section pt-md-4 pt-5 mt-5">
+    <!-- Start Features -->
+    <div class="container">
+        <div class="row text-justify">
+            <div class="col-lg-12">
+                <div class="f25n">
+                    @Html.Raw(Model.Input.Text)
+                </div>
+            </div><!--end col-->
+            <div class="col-lg-12">
+                <div class="f18n mt-5">
+                    <strong>@faShare</strong>
+                </div>
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=@pagelink" target="_blank" class="btn btn-icon btn-outline-primary"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="http://twitter.com/share?text=@pagelink" target="_blank" class="btn btn-icon btn-outline-info"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://telegram.me/share/url?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-blue"><i class="fa fa-paper-plane"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://api.whatsapp.com/send/?phone&text=@pagelink" target="_blank" class="btn btn-icon btn-outline-success"><i class="fa fa-whatsapp"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=@pagelink" target="_blank" class="btn btn-icon btn-outline-dark"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul><!--end icon-->
+            </div>
+        </div><!--end row-->
+    </div><!--end container-->
+    <!-- End Features -->
+</section><!--end section-->
+@if (Model.Input.EmbedLinkGoogleMap != null)
+{
+    <!-- Map start -->
+    @*getbootstrap.com/docs/4.5/components/modal/*@
+    <div class="modal fade" id="Map" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@faTitleMap</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="bg-white p-0 rounded box-shadow">
+                        <div class="py-0">
+                            <iframe src="@Model.Input.EmbedLinkGoogleMap" style="width: 100%; min-height: 25vh; border:0;" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">@faClose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Map end -->
+}
+<!-- Section End -->
+@section Scripts {
+    @*jqueryscript.net/other/Awesome-Video-Background-Plugin-with-HTML5-Youtube-API-YTPlayer.html*@
+    <!-- YTPlayer -->
+    <script src="~/lib/js/dist/jquery.mb.YTPlayer.min.js"></script>
+    <script>
+        $(".player").mb_YTPlayer();
+    </script>
+    <!-- Countdown -->
+    <script src="~/lib/js/dist/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript">
+        $('#countdown').countdown('@Model.Input.Countdown', function (event) {
+            var $this = $(this).html(event.strftime(''
+                + '<div class="count-down"><span class="count-number">%D</span><span class="count-head position-relative d-block">روز</span></div> '
+                + '<div class="count-down"><span class="count-number">%H</span><span class="count-head position-relative d-block">ساعت</span></div> '
+                + '<div class="count-down"><span class="count-number">%M</span><span class="count-head position-relative d-block">دقیقه</span></div> '
+                + '<div class="count-down"><span class="count-number">%S</span><span class="count-head position-relative d-block">ثانیه</span></div>'
+            ));
+        });
+    </script>
+}
+@*stackoverflow.com/questions/21447269/how-to-limit-the-length-of-text-in-a-paragraph*@

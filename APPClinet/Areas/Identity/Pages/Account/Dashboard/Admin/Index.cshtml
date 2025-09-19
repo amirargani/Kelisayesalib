@@ -1,0 +1,91 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.IndexModel
+@{
+
+    var faUserProfile = APPClinet.Messages.faMessage.UserProfile.ToString();
+    ViewData["Title"] = faUserProfile;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faEmail = APPClinet.Messages.faMessage.Email.ToString();
+    var faFirstName = APPClinet.Messages.faMessage.FirstName.ToString();
+    var faLastName = APPClinet.Messages.faMessage.LastName.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="index-form mt-4" id="index-form" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Username">@faEmail</label>
+                <i class="far fa-envelope icon-sm icons"></i>
+                <input type="email" asp-for="Username" class="form-control pl-5 fen" placeholder="" disabled>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.FirstName">@faFirstName</label>
+                <i class="far fa-address-book icon-sm icons"></i>
+                <input type="text" asp-for="Input.FirstName" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.LastName">@faLastName</label>
+                <i class="fas fa-address-book icon-sm icons"></i>
+                <input type="text" asp-for="Input.LastName" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12 mb-0">
+            <button class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    @*sweetalert2.github.io/*@
+    @*animate.style*@
+    @*bootstrap-notify.remabledesigns.com/*@
+    @*php-flasher.github.io/*@
+    @*codeseven.github.io/toastr/demo.html*@
+    @*onaircode.com/awesome-javascript-alert-box-code-snippet/*@
+    @if (Model.StatusMessage != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            @*Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: '@Model.StatusMessage',
+                showConfirmButton: false,
+                timer: 2500,
+                showClass: {
+                    popup: 'animate__animated animate__bounceIn'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__bounceOut'
+                }
+            })*@
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '@Model.StatusMessage'
+            })
+        </script>
+}
+    <partial name="_ValidationScriptsPartial" />
+}

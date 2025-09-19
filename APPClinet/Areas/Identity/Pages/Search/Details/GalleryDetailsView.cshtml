@@ -1,0 +1,112 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Search.Details.GalleryDetailsViewModel
+@{
+    ViewData["Title"] = Model.Input.TitleSubCategory;
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+    string image = "/uploads/images/details/default/default.jpg";
+    var faPrev = APPClinet.Messages.faMessage.Prev.ToString();
+    var faNext = APPClinet.Messages.faMessage.Next.ToString();
+}
+
+<!-- Hero Start -->
+<section class="bg-half-260 bg-primary d-table w-100" style="background: url('@image') center center;background-size: cover;margin-top: 82px;" id="home">
+    <div class="bg-overlay"></div>
+</section><!--end section-->
+@*<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+    <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+    </svg>
+    </div>
+    </div>*@
+<!-- Hero End -->
+<!-- Hero Start -->
+<section class="section pt-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next">
+                    <div aria-label="breadcrumb" class="d-inline-block">
+                        <div class="breadcrumb bg-white rounded shadow mb-0">
+                            <div class="breadcrumb-item"><strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleCategory</strong>&nbsp;&nbsp;<strong><i class="fas fa-caret-left mr-2"></i>@Model.Input.TitleSubCategory</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+<!-- Hero Start -->
+<section class="section pt-md-4 pt-5">
+    <div class="container">
+        <div class="row projects-wrapper">
+            @*@if (Model.details.Count > 0)
+            {
+                foreach (var item in Model.details.OrderByDescending(u => u.Date))
+                {
+
+                }
+            }*@
+            @*page-blog-grid*@
+            @if (Model.pages.galleryDetails.Count > 0)
+            {
+                foreach (var item in Model.pages.galleryDetails)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4 pb-2">
+                        <div class="card blog rounded border-0 shadow overflow-hidden">
+                            <div class="position-relative">
+                                <img src="/uploads/images/details/galleries/@item.ImageLink" class="card-img-top" alt="@item.Title">
+                                <div class="overlay rounded-top bg-dark"></div>
+                            </div>
+                            <div class="content p-3">
+                                <h6><a href="/Identity/Search/Details/GalleryDetailsInfoView?id=@item.Id&title=@item.Title.Replace(" ", "§").ToString()" class="card-title text-dark">@item.Title</a></h6>
+                                <div class="post-meta d-flex justify-content-between mt-3">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="list-inline-item mr-2 mb-0"> @if (item.CountViews == null){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>0</span>}@if (item.CountViews > 0){<span class="ml-2 f15 mb-3"><i class="fas fa-eye f15 mr-2"></i>@item.CountViews</span>}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="author">
+                                @*<small class="text-light user d-block"><i class="mdi mdi-account"></i></small>*@
+                                <small class="text-light date"><i class="fas fa-calendar-alt f25 mr-2"></i>@ShamsiPlugin.ToPeString(Convert.ToDateTime(item.Date), "dddd dd MMMM yyyy") | <span class="ml-2 f10 mb-3 fen"><strong>@item.Date.ToString("dd/MM/yyyy")</strong></span>&nbsp;&nbsp;</small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <!-- PAGINATION START -->
+            @*href="javascript:void(0)"*@
+            @if (Model.pages.PageCount > 1)
+            {
+                <div class="col-12 pt-md-4 pt-5">
+                    <ul class="pagination justify-content-center mb-0">
+                        @if (Model.pages.CurrentPage > 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Identity/Search/Details/GalleryDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@(Model.pages.CurrentPage - 1)" aria-label="Previous">@faPrev</a></li>
+                        }
+                        @for (int i = 1; i <= Model.pages.PageCount; i++)
+                        {
+                            <li class="page-item @((i == Model.pages.CurrentPage)? "active" : "")">
+                                @if (i == Model.pages.CurrentPage)
+                                {
+                                    <span class="page-link" style="cursor: default;">@i</span>
+                                }
+                                @if (i != Model.pages.CurrentPage)
+                                {
+                                    <a class="page-link" href="/Identity/Search/Details/GalleryDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@i">@i</a>
+                                }
+                            </li>
+                        }
+                        @if (Model.pages.CurrentPage < Model.pages.PageCount)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Identity/Search/Details/GalleryDetailsView?titlesubcategory=@Model.Input.TitleSubCategory&pageid=@(Model.pages.CurrentPage + 1)" aria-label="Next">@faNext</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+            <!-- PAGINATION END -->
+        </div><!--end row-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- Hero End -->

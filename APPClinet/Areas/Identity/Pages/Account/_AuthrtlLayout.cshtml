@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/fa/rtl/_rtlLayout.cshtml";
+}
+
+@section Stylesheet {
+    @await Html.PartialAsync("~/Views/Shared/_AnimateCSS.cshtml")
+}
+
+<!-- Hero Start -->
+<section class="bg-half bg-white d-table w-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next-level">
+                    @*<h4 class="title mb-0">ورود به سایت / ثبت نام در سایت</h4>*@
+                    <!-- Nav Tabs Start -->
+                    <div class="col mt-2 pt-2" id="nav-tabs">
+                        <div class="p-0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded" href="/Identity/Account/Login" role="tab">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h5 class="title font-weight-normal mb-0" data-aos="fade-right" data-aos-duration="1000">ورود به سایت</h5>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded" href="/Identity/Account/Register" role="tab">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h5 class="title font-weight-normal mb-0" data-aos="fade-left" data-aos-duration="1000">ثبت نام در سایت</h5>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                    </ul><!--end nav pills-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+
+                            <div class="row pt-2">
+                                <div class="col-12">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" role="tabpanel">
+                                            @RenderBody()
+                                        </div><!--end teb pane-->
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav Tabs End -->
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+@section Scripts { <!--ctrl + k und d-->
+    @RenderSection("Scripts", required: false)
+    <script>
+        var current = location.pathname;
+        $('.nav-pills li a').each(function () {
+            var $this = $(this);
+            if (current.indexOf($this.attr('href')) !== -1) {
+                $this.addClass('active');
+            }
+        })
+    </script>
+    @await Html.PartialAsync("~/Views/Shared/_AnimateJavaScript.cshtml")
+}

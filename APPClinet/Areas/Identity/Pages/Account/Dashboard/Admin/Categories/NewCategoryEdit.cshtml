@@ -1,0 +1,78 @@
+﻿@page
+@model APPClinet.Areas.Identity.Pages.Account.Dashboard.Admin.Categories.NewCategoryEditModel
+@{
+    var faCategoryEdit = APPClinet.Messages.faMessage.CategoryEdit.ToString();
+    ViewData["Title"] = faCategoryEdit;
+    Layout = "~/Areas/Identity/Pages/Account/Dashboard/Admin/_UserNavrtl.cshtml";
+    var faMenusBack = APPClinet.Messages.faMessage.MenusBack.ToString();
+    var faCategoriesBackView = APPClinet.Messages.faMessage.CategoriesBackView.ToString();
+    var faTitleCategory = APPClinet.Messages.faMessage.TitleCategory.ToString();
+    var faDescription = APPClinet.Messages.faMessage.Description.ToString();
+    var faFontName = APPClinet.Messages.faMessage.FontName.ToString();
+    var faButtonActivePassive = APPClinet.Messages.faMessage.ButtonActivePassive.ToString();
+    var faButtonSave = APPClinet.Messages.faMessage.ButtonSave.ToString();
+}
+
+<div class="p-0 mb-2">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2 class="text-left">@faCategoryEdit</h2>
+        </div>
+        <div class="col-sm-7">
+            <a class="btn btn-dark font-weight-bold" href="/Identity/Account/Dashboard/Admin/Categories/NewCategoriesView"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faCategoriesBackView</a>
+            <a class="btn btn-secondary font-weight-bold" href="/Identity/Account/Dashboard/Admin/Menus"><i class="fas fa-arrow-alt-circle-left mr-2"></i>@faMenusBack</a>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider"></div>
+@*<partial name="_StatusMessage" model="Model.StatusMessage" />*@
+<form class="newcategoryedit-form mt-4" id="newcategoryedit-form" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.TitleCategory">@faTitleCategory</label>
+                <i class="fas fa-pencil-alt icon-sm icons"></i>
+                <input type="text" asp-for="Input.TitleCategory" class="form-control pl-5" placeholder="">
+                <span asp-validation-for="Input.TitleCategory" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.Description">@faDescription</label>
+                <i class="fas fa-clipboard-list icon-sm icons"></i>
+                <textarea asp-for="Input.Description" class="form-control pl-5" placeholder="" rows="3"></textarea>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="form-group position-relative">
+                <label asp-for="Input.FontName">@faFontName</label>
+                <i class="fas fa-chess icon-sm icons"></i>
+                <input type="text" asp-for="Input.FontName" class="form-control pl-5 fen" placeholder="">
+                <span asp-validation-for="Input.FontName" class="text-danger"></span>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <div class="form-group mb-0">
+                            <input type="checkbox" asp-for="Input.ActivePassive" class="custom-control-input" id="customSwitch1">
+                            <label asp-for="Input.ActivePassive" class="custom-control-label" for="customSwitch1">@faButtonActivePassive</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-lg-12 mb-0">
+            <button asp-page-handler="Change" asp-route-id="@Model.Input.Id" class="btn btn-primary btn-block">@faButtonSave</button>
+        </div><!--end col-->
+    </div><!--end row-->
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
