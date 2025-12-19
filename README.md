@@ -20,8 +20,6 @@ A comprehensive church management system designed to support churches and congre
 - [Usage](#-usage)
 - [Screenshots](#-screenshots)
 - [Contributing](#-contributing)
-- [License](#-license)
-- [Support](#-support)
 
 ---
 
