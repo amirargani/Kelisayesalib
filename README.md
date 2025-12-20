@@ -18,7 +18,6 @@ A comprehensive church management system designed to support churches and congre
 - [Configuration](#-configuration)
 - [Project Structure](#-project-structure)
 - [Usage](#-usage)
-- [Screenshots](#-screenshots)
 - [Contributing](#-contributing)
 
 ---
@@ -59,11 +58,14 @@ A comprehensive church management system designed to support churches and congre
 - **HTML5** / **CSS3** / **JavaScript**
 - **Bootstrap** (Responsive Framework)
 - **jQuery** (DOM Manipulation)
+- **Template Engine:** Razor Views (MVC)
 
 ### Development Tools
 - **Visual Studio 2019/2022** or **Visual Studio Code**
 - **SQL Server Management Studio** (SSMS)
 - **.NET 5.0 SDK**
+- **Package Manager:** NuGet
+- **Version Control:** Git
 
 ---
 
@@ -210,12 +212,6 @@ Church_Kelisayesalib/
 2. Add event details, description, and images
 3. Set registration options if needed
 4. Publish to the calendar
-
----
-
-## 📸 Screenshots
-
-> **Note**: Add screenshots of your application here to showcase the user interface and key features.
 
 ---
 
