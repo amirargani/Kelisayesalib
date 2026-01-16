@@ -1,9 +1,11 @@
 # 🙏 Church Management System (Kelisayesalib)
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.txt)
-[![Language](https://img.shields.io/badge/Language-C%23-green.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
-[![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![.NET](https://img.shields.io/badge/.NET-5.0-purple.svg)](https://dotnet.microsoft.com/download/dotnet/5.0)
+[![License](https://img.shields.io/badge/License-Apache_2.0-FF6B35?style=for-the-badge&logo=apache&logoColor=white)](LICENSE.txt)
+[![Language](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![.NET](https://img.shields.io/badge/.NET_5.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/download/dotnet/5.0)
+[![Platform](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
+[![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet)
+[![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/sql-server)
 
 A comprehensive church management system designed to support churches and congregations in planning, organizing, and executing worship services and events. Built with ASP.NET Core MVC, this application features intuitive user interfaces tailored for administrators, staff, and attendees.
 
