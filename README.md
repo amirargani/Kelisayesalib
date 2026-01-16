@@ -4,7 +4,7 @@
 [![Language](https://img.shields.io/badge/Language-C%23-239120.svg?style=for-the-badge&logo=csharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6.svg?style=for-the-badge&logo=windows)](https://www.microsoft.com/en-us/windows)
 [![Framework](https://img.shields.io/badge/Framework-ASP.NET_Core_5.0-512BD4.svg?style=for-the-badge&logo=.net&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet)
-[![Database](https://img.shields.io/badge/Database-SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
+[![Database](https://img.shields.io/badge/Database-SQL_Server-005A9C?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
 
 A comprehensive church management system designed to support churches and congregations in planning, organizing, and executing worship services and events. Built with ASP.NET Core MVC, this application features intuitive user interfaces tailored for administrators, staff, and attendees.
 
