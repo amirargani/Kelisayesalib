@@ -47,6 +47,10 @@ APPClinet/wwwroot/lib/js/dist/app/** -linguist-vendored -linguist-generated ling
 APPClinet/wwwroot/lib/js/dist/*.init.js -linguist-vendored -linguist-generated linguist-detectable linguist-language=JavaScript
 APPClinet/wwwroot/lib/css/dist/en/** -linguist-vendored -linguist-generated linguist-detectable linguist-language=CSS
 APPClinet/wwwroot/lib/css/dist/fa/** -linguist-vendored -linguist-generated linguist-detectable linguist-language=CSS
+APPClinet/wwwroot/lib/jquery-validation/dist/** -linguist-vendored -linguist-generated linguist-detectable linguist-language=JavaScript
+APPClinet/wwwroot/lib/jquery-validation-unobtrusive/** -linguist-vendored -linguist-generated linguist-detectable linguist-language=JavaScript
+APPClinet/wwwroot/lib/jquery/dist/** -linguist-vendored -linguist-generated linguist-detectable linguist-language=JavaScript
+
 
 # 3. Force show all C# and CSHTML files
 APPClinet/**/*.cs -linguist-vendored -linguist-generated linguist-detectable linguist-language=C#
